@@ -1,0 +1,1 @@
+import{r as e}from"./navigation-errors-BlPKQMqm.js";import"./navigation.react-server-_9n6noFB.js";async function t({searchParams:t}){let{service:n}=await t;e(`/services`+(n?`#`+encodeURIComponent(n):``))}export{t as default};

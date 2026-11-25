@@ -1,0 +1,1 @@
+import{d as e,f as t,h as n}from"../../index.js";var r=n(t(),1),i=e();function a({image:e,title:t}){let[n,a]=(0,r.useState)(``);return!e||n===e?(0,i.jsx)(`span`,{className:`machine-photo-fallback`,children:`Equipment photo unavailable`}):(0,i.jsx)(`img`,{src:e,alt:t,loading:`lazy`,onError:()=>a(e)})}export{a as MachinePicture};

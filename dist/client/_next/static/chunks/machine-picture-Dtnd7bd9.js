@@ -1,0 +1,1 @@
+import{r as e}from"./rolldown-runtime-C60lm6uB.js";import{i as t,r as n}from"./framework-D_rUT4EX.js";var r=e(t(),1),i=n();function a({image:e,title:t}){let[n,a]=(0,r.useState)(``);return!e||n===e?(0,i.jsx)(`span`,{className:`machine-photo-fallback`,children:`Equipment photo unavailable`}):(0,i.jsx)(`img`,{src:e,alt:t,loading:`lazy`,onError:()=>a(e)})}export{a as MachinePicture};

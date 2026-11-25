@@ -1,0 +1,12 @@
+export const services = [
+  ["Sales & technical support", "Discuss your product, production target and site layout with the engineering team to identify suitable equipment."],
+  ["Maintenance & repairs", "Arrange technical assistance for worn components, machine faults and planned maintenance."],
+  ["Machine upgrades", "Review an existing line and identify equipment upgrades that fit your next production target."],
+  ["Spare parts", "Share the machine model and part details to enquire about a replacement component."],
+  ["Flexible support agreements", "Discuss the maintenance schedule and support coverage your facility needs."],
+  ["Quality assurance", "Review quality checks and production requirements for your equipment."],
+  ["Supply chain support", "Discuss machinery sourcing, delivery coordination and spare-part availability."],
+  ["Training & consulting", "Arrange guidance for operators and maintenance teams working with your equipment."],
+] as const;
+
+export const quoteUrl = (interest: string) => `/quote?interest=${encodeURIComponent(interest)}`;

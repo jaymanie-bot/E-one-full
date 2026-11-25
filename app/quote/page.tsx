@@ -1,0 +1,3 @@
+import Form from "./form";
+export const metadata={title:"Request a quotation"};
+export default async function Page({searchParams}:{searchParams:Promise<{interest?:string}>}){const params=await searchParams;return <main id="main" className="wrap inner"><a className="back" href="/">Home /</a><div className="split quote"><div><div className="eyebrow"><i/>PROJECT ENQUIRY</div><h1>Request a<br/>quotation<span>.</span></h1><p>Tell us about your product, target output and existing equipment so the engineering team can assess your requirements.</p><img className="quotephoto" src="/media/pipelines.webp" alt="Pipework on an industrial production line"/></div><Form interest={params.interest||""}/></div></main>}

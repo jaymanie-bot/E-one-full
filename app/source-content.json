@@ -1,0 +1,134 @@
+{
+  "lines": {
+    "bottled-water": {
+      "title": "Bottled Water Production Line",
+      "category": "Water",
+      "type": "Production Line",
+      "capacity": "2000-20000 BPH",
+      "image": "/eone/bottled-water-line.webp",
+      "description": "This fully integrated production line is engineered for the hygienic, sustainable, and cost-effective manufacturing of bottled water in PET containers, combining bottle blowing system with advanced water treatment, high-speed filling, labeling, coding, and packaging.",
+      "features": [
+        "Fully automated production process",
+        "High-speed filling up to 20,000 bottles per hour",
+        "Advanced water treatment system (RO/UV/Ozone)",
+        "Integrated blow molding for PET bottles",
+        "Precision filling with minimal waste",
+        "Automatic labeling and coding systems"
+      ]
+    },
+    "carbonated": {
+      "title": "Carbonated Drink Production Line",
+      "category": "Carbonated",
+      "type": "Production Line",
+      "capacity": "2000-15000 BPH",
+      "image": "/eone/carbonated-drink-line.webp",
+      "description": "This advanced production line delivers a full-service solution for producing carbonated drinks in PET, glass bottles, or cans, equipped with integrated blow molding system for PET formats, precision carbonation, and robust packaging systems.",
+      "features": [
+        "Precision carbonation control system",
+        "Supports PET, glass, and can formats",
+        "Integrated blow molding for PET bottles",
+        "High-speed filling and capping",
+        "Consistent quality and extended shelf-life",
+        "Fully automated operation"
+      ]
+    },
+    "barrel-water": {
+      "title": "Barrel Water Production Line",
+      "category": "Water",
+      "type": "Production Line",
+      "capacity": "200-2000 BPH",
+      "image": "/eone/barrel-water-line.webp",
+      "description": "This production line is purpose-built for the hygienic and efficient bottling of the 19-litre water barrels\u2014widely used with water dispensers in homes, offices, and commercial settings.",
+      "features": [
+        "Industrial-grade washing system",
+        "Automatic barrel filling and capping",
+        "High-pressure cleaning and sanitization",
+        "Suitable for 19L standard barrels",
+        "Efficient large-format production",
+        "Reliable and cost-effective solution"
+      ]
+    },
+    "dairy": {
+      "title": "Dairy Milk Production Line",
+      "category": "Dairy",
+      "type": "Production Line",
+      "capacity": "1000-10000 BPH",
+      "image": "/eone/dairy-milk-line.webp",
+      "description": "This dairy milk production line is engineered for the efficient, hygienic, and high-volume processing of fresh and long-life milk. It provides a fully integrated system from raw milk reception to final packaging.",
+      "features": [
+        "Raw milk reception and processing",
+        "Pasteurization and UHT treatment",
+        "Aseptic filling technology",
+        "Extended shelf life capability",
+        "Complete product safety assurance",
+        "Consistent quality at every stage"
+      ]
+    },
+    "juice": {
+      "title": "Juice Production Line",
+      "category": "Juice",
+      "type": "Production Line",
+      "capacity": "1000-12000 BPH",
+      "image": "/eone/juice-line.webp",
+      "description": "This high-performance juice production line is designed for the efficient, hygienic, and cost-effective manufacturing of fruit juices, nectars, and juice-based drinks.",
+      "features": [
+        "Raw juice preparation system",
+        "Thermal treatment and sterilization",
+        "Aseptic blending and filling",
+        "Modular and automated system",
+        "Commercial-scale production capacity",
+        "Integrated coding and packaging"
+      ]
+    },
+    "edible-oil": {
+      "title": "Edible Oil Filling Machines",
+      "category": "Edible Oil",
+      "type": "Filling Machine",
+      "capacity": "500-6000 BPH",
+      "image": "/eone/edible-oil-line.webp",
+      "description": "Our edible oil filling machines are purpose-built for accurate, clean, and efficient dispensing of all types of edible oils\u2014including vegetable oil, palm oil, sunflower oil, soybean oil, groundnut oil, and specialty oils.",
+      "features": [
+        "Precision filling technology",
+        "Supports various oil types",
+        "Semi-automatic and fully automatic options",
+        "Suitable for startups to industrial plants",
+        "Clean and efficient operation",
+        "Minimal product waste"
+      ]
+    },
+    "plastic-injection": {
+      "title": "Plastic Injection & Cap Compression Machines",
+      "category": "Plastic",
+      "type": "Machine",
+      "capacity": "Various",
+      "image": "/eone/plastic-injection.webp",
+      "description": "Our plastic molding machinery portfolio includes injection molding machines for PET preforms and other plastic components, as well as cap compression molding machines for high-speed, high-precision closure production.",
+      "features": [
+        "PET preform injection molding",
+        "Cap compression molding",
+        "Energy-efficient operation",
+        "Mold flexibility for various formats",
+        "High-precision production",
+        "Suitable for multiple industry sectors"
+      ]
+    }
+  },
+  "statements": [
+    "To be a trusted partner within our customers' businesses, delivering innovative, high-quality machinery and exceptional after-sales support to empower their growth and success.",
+    "To become Africa's leading supplier of liquid packaging solutions, recognized for our advanced technology, reliability, and commitment to excellence."
+  ],
+  "steps": [
+    [
+      "consultation & design",
+      "We begin by thoroughly assessing your requirements and objectives to develop a tailored approach for your production line."
+    ],
+    [
+      "manufacturing & assembly",
+      "Our team collaborates to create and assemble your machinery, ensuring all aspects meet the highest quality standards."
+    ],
+    [
+      "installation & commissioning",
+      "Utilizing advanced technologies and skilled personnel, we install and commission your production line for optimal performance."
+    ]
+  ]
+}
