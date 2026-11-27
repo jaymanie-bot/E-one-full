@@ -9,6 +9,8 @@ import { solutionGuides } from "../../solution-guides";
 import { bestCrownFillingTables } from "../../bestcrown-data";
 import { BestCrownLineSystems, BestCrownPartner } from "../bestcrown";
 import { InjectionSections } from "../injection";
+import { HeyanSections } from "../heyan";
+import { PartnerAttribution } from "../../partner-attribution";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -45,6 +47,8 @@ export default async function SolutionDetail({ params }: Props) {
             <div className="eyebrow"><i />{isMoulds ? "PRECISION TOOLING" : "PRODUCTION SOLUTION"}</div>
             <h1>{solution.title}<span>.</span></h1>
             <p className="lede">{solution.summary}</p>
+            {isInjection && <PartnerAttribution partner="hwamda" />}
+            {isMoulds && <PartnerAttribution partner="heyan" />}
             {showBestCrownPartner && <BestCrownPartner />}
             <a className="btn orange" href={quoteUrl(solution.title)}>
               {isMoulds ? "Request a mould quotation" : "Request a line quotation"}
@@ -52,7 +56,7 @@ export default async function SolutionDetail({ params }: Props) {
             <a className="textlink specifications-jump" href="#technical-specifications">See specifications</a>
           </div>
           <figure className="catalogue-figure">
-            <img className="solution-hero-image" src={solution.image} alt={solution.imageAlt ?? solution.title} />
+            <img className={isInjection || isMoulds ? "solution-hero-image catalogue-product-image" : "solution-hero-image"} src={solution.image} alt={solution.imageAlt ?? solution.title} />
             {solution.imageCaption && <figcaption>{solution.imageCaption}</figcaption>}
           </figure>
         </div>
@@ -85,9 +89,10 @@ export default async function SolutionDetail({ params }: Props) {
       )}
 
       {isInjection && <InjectionSections />}
+      {isMoulds && <HeyanSections />}
 
       {solution.stages.length > 0 && <section className="wrap section">
-        <h2>{isMoulds ? "Mould applications" : "Process stages"}<span>.</span></h2>
+        <h2>{isMoulds ? "From product design to production" : "Process stages"}<span>.</span></h2>
         <div className="stage-grid">
           {solution.stages.map((stage) => (
             <article key={stage.title}>
@@ -106,22 +111,7 @@ export default async function SolutionDetail({ params }: Props) {
             </figcaption>
           </figure>
         )}
-        {isMoulds && (
-          <div className="injection-media mould-media">
-            <figure>
-              <div className="injection-line-photo"><MachinePicture image="/eone/hwamda-preform-moulds.webp" title="Open 16-, 32- and 48-cavity PET preform moulds with their core and cavity plates exposed" /></div>
-              <figcaption>Open core and cavity plates for 16-, 32- and 48-cavity PET preform tooling. Reference from the Hwamda PET catalogue.</figcaption>
-            </figure>
-            <figure>
-              <div className="injection-line-photo"><MachinePicture image="https://heyanmold.com/wp-content/uploads/2026/01/53-1024x576.webp" title="PET preform tooling being checked in an injection moulding machine" /></div>
-              <figcaption>Heyan Technology PET preform mould setup and trials.</figcaption>
-            </figure>
-            <figure>
-              <div className="injection-line-photo"><MachinePicture image="https://heyanmold.com/wp-content/uploads/2025/12/4.webp" title="Heyan precision mould tooling" /></div>
-              <figcaption><a href="https://heyanmold.com/product-category/bottle-blowing-mold/">Heyan Technology</a> tooling for bottle blowing.</figcaption>
-            </figure>
-          </div>
-        )}
+
       </section>}
 
       {isBeverageHub && <BestCrownLineSystems />}
@@ -152,7 +142,7 @@ export default async function SolutionDetail({ params }: Props) {
           <div className="related-machines">
             {related.map((machine) => machine && (
               <a className="related-machine" href={`/product/${machine.slug}`} key={machine.slug}>
-                <MachinePicture image={machine.image} title={machine.title} />
+                <MachinePicture image={machine.image} title={machine.title} fallbackImage={machine.fallbackImage} />
                 <div>
                   <span>{machineCategoryLabels[machine.category]}</span>
                   <h3>{machine.title}</h3>

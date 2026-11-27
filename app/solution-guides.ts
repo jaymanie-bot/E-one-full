@@ -1,4 +1,4 @@
-import type { BuyerGuide } from "./buyer-data";
+import { servoPressTable, type BuyerGuide } from "./buyer-data";
 import { bestCrownFillingTables } from "./bestcrown-data";
 
 export const solutionGuides: Record<string, BuyerGuide> = {
@@ -14,9 +14,10 @@ export const solutionGuides: Record<string, BuyerGuide> = {
     enquiry: ["Product drawing or sample, resin and target piece weight", "Cavity count, mould drawings and target good parts/hour", "Site power, cooling, air and required automation"],
     question: "How should I compare quoted press capacities?",
     answer: "Compare good parts/hour on the same resin, part weight and cavities. A 48-cavity tool at a 12-second cycle gives a theoretical 14,400 pieces/hour. Allow separately for rejects, planned stops and changeovers when sizing saleable output.",
+    table: servoPressTable,
   },
   moulds: {
-    application: "The best tooling quote starts with one approved part drawing and the press or blower it will run on. For injection tools, check tool mounting, nozzle and locating ring, shut height, tie bars, cooling connections and ejection. Agree what E-One will verify during the tool trials and which consumable inserts and seals you should stock.",
+    application: "For a Heyan tooling quotation, start with one approved part drawing and the press or blower it will run on. For injection tools, check tool mounting, nozzle and locating ring, shut height, tie bars, cooling connections and ejection. Agree what E-One will verify during the tool trials and which consumable inserts and seals you should stock.",
     sizing: {
       "Part and material": "Drawing revision, resin grade, part weight, dimensions, surface finish and mating parts",
       "Tool construction": "Core and cavity steel, surface treatment, changeable inserts, wear parts and finish",
@@ -29,15 +30,17 @@ export const solutionGuides: Record<string, BuyerGuide> = {
     question: "Should I choose a hot runner or a cold runner?",
     answer: "Compare resin cost, cavity balance, gate requirements and maintenance. A hot runner can reduce runner scrap in sustained production. A cold runner can simplify the tool for suitable products or shorter runs. The part, resin and production schedule determine the fit.",
     table: {
-      title: "Compare mould applications",
-      columns: ["Application", "What sets the design", "What to approve"],
+      title: "Heyan mould portfolio — technical design references",
+      columns: ["Tool type", "Catalogue configuration", "What sets the design", "What to approve"],
       rows: [
-        ["PET preform", "Neck finish, mass, preform profile, hot runner and post-mould cooling", "Weight by cavity, neck dimensions and downstream blow trial"],
-        ["Cap or closure", "Thread, seal, tamper band, ejection and bottle neck", "Torque, leakage and tamper-band performance on the mating bottle"],
-        ["Custom injection", "Resin, wall thickness, cosmetic zones, parting line and inserts", "Drawing dimensions, finish, fit and repeatable cycle"],
-        ["Blow mould", "Container drawing, blower station, preform and change parts", "Finished volume, wall distribution, drop and top-load performance"],
+        ["PET preform", "1–144 cavities; needle-valve hot runner", "Neck finish, mass, preform profile, machine and cooling", "Weight by cavity, neck dimensions and downstream blow trial"],
+        ["Rotary bottle-blow mould", "Custom rotary-station tooling", "Bottle drawing, preform, station and base-mould fit", "Finished volume, wall distribution, drop and top-load results"],
+        ["Linear bottle-blow mould", "Custom linear-cavity layout", "Bottle geometry, pitch, base and mounting interfaces", "Dimensions, bottle consistency and pack trials"],
+        ["Cap or closure", "Independently controlled cavity heating; separate cooling; replaceable inserts", "Thread, seal, tamper band, ejection and mating neck", "Torque, leakage and band performance"],
+        ["Carrying handle", "Custom injection tooling", "Attachment geometry, resin, intended carrying duty", "Assembly fit, finish and agreed load test"],
+        ["Lifting ring", "Custom injection tooling", "Neck engagement, ring profile, resin and cavity count", "Assembly, handling and required strength"],
       ],
-      note: "Heyan publishes 8-, 16-, 24- and 32-cavity cap mould references. Its documented 96-cavity preform project reports a 10.3-second cycle with 7.5 g preforms. These are tooling references for those configurations.",
+      note: "Heyan Precision Mold Technology catalogue, pp. 3–6. Cavity counts for other mould types, dimensions, steel, controller, compatibility, output and acceptance criteria must be agreed for the actual tool and machine.",
     },
   },
   "turnkey-beverage": {

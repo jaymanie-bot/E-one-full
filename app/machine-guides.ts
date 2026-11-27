@@ -1,4 +1,5 @@
-import { pailPressTable, preformPressTable, type BuyerGuide } from "./buyer-data";
+import { pailPressTable, preformPressTable, servoPressTable, type BuyerGuide } from "./buyer-data";
+import { bestCrownFillingTables } from "./bestcrown-data";
 
 export const machineGuides: Record<string, BuyerGuide> = {
   "oop-labelling-machine": {
@@ -76,7 +77,7 @@ export const machineGuides: Record<string, BuyerGuide> = {
   "carbonated-filling-machine": {
     application: "A counter-pressure filler brings the bottle and product supply to compatible pressure before filling. A controlled pressure release precedes closure. Stable product temperature, short transfer distance and a correctly matched pressure-rated pack help limit foam and CO₂ loss.",
     sizing: {
-      "Reference platform": "DXGF rinsing, pressure filling and capping for compatible bottles",
+      "Reference platform": "Best Crown PET CSD blow–fill–cap or selected isobaric system",
       "Product conditions": "CO₂ in g/L or volumes, liquid temperature and foam behaviour",
       "Output": "Bottles/hour by beverage and bottle volume, with agreed fill tolerance",
       "Utilities and cleaning": "Beverage-grade CO₂, chilled product, service air and CIP interface",
@@ -84,9 +85,10 @@ export const machineGuides: Record<string, BuyerGuide> = {
     enquiry: ["Beverage style, CO₂ target and product temperature", "Bottle and closure samples with pressure ratings", "Bottles/hour, fill tolerance and cleaning needs"],
     question: "Can one carbonated filler run several bottle sizes?",
     answer: "Check each pressure-rated bottle and closure against the machine's clearances, handling parts, filling valves and target output. Agree on the changeover requirements for each format.",
+    table: bestCrownFillingTables["carbonated-drink-production-line"],
   },
   "barrel-filling-machine": {
-    application: "QGF barrel equipment serves water dispenser packs. Plan external inspection and decapping upstream for returns. Internal washing and rinsing should suit the barrel material, incoming condition and site's sanitation programme.",
+    application: "Best Crown DG5 equipment serves returnable water-dispenser packs. Plan external inspection and decapping upstream for returns. Internal washing and rinsing should suit the barrel material, incoming condition and site's sanitation programme.",
     sizing: {
       "Output basis": "Barrels/hour after the full washing, filling and capping cycle",
       "Wash system": "Internal stages, external brush washer, rinse verification and wash-water handling",
@@ -96,11 +98,12 @@ export const machineGuides: Record<string, BuyerGuide> = {
     enquiry: ["Barrel drawing, cap sample and intended return policy", "Expected condition of returned barrels and output target", "Washwater, drain and utility availability"],
     question: "Why does a returnable line need more than a filler?",
     answer: "Returned barrels can arrive damaged or contaminated. Inspect, reject, decap, wash and verify the accepted barrels before filling, then cap and check the finished pack.",
+    table: bestCrownFillingTables["barrel-water-production-line"],
   },
   "bottle-water-filling-machine": {
-    application: "A CXGF monoblock rinses, fills and caps still-water PET bottles in one transfer sequence. Neck handling can support several volumes sharing the same compatible finish. Set the water treatment and buffer supply around the fill rate and the quality of the incoming water.",
+    application: "A Best Crown monoblock rinses, fills and caps still-water PET bottles in one transfer sequence. Neck handling can support several volumes sharing the same compatible finish. Set the water treatment and buffer supply around the fill rate and the quality of the incoming water.",
     sizing: {
-      "Reference platform": "CXGF three-in-one with matched rinser, filler and capper",
+      "Reference platform": "Best Crown three-in-one monoblock or integrated blow–fill–cap platform",
       "Bottle basis": "Volume, neck finish, cap type, bottle height and diameter",
       "Capacity": "Bottles/hour by pack size, matched to the capper and downstream equipment",
       "Product connection": "Treated water supply, clean-in-place interface and reject handling",
@@ -108,6 +111,7 @@ export const machineGuides: Record<string, BuyerGuide> = {
     enquiry: ["Bottle range and closure drawing", "BPH by volume and filler feed method", "Product-water specification and utilities"],
     question: "Can one machine fill 500 mL and 1.5 L bottles?",
     answer: "Often, where neck finish and machine clearances are compatible. Quote each size with any change parts, changeover time and its own output.",
+    table: bestCrownFillingTables["bottled-water-production-line"],
   },
   "juice-filling-machine-hot-filling": {
     application: "A hot-fill machine receives beverage after controlled thermal processing and fills heat-compatible bottles. Closure treatment, hold and cooling are designed around the recipe and package. Trials should confirm package shape, seal integrity and the fill result at production temperature.",
@@ -120,6 +124,7 @@ export const machineGuides: Record<string, BuyerGuide> = {
     enquiry: ["Product properties and target shelf life", "Heat-compatible container and closure samples", "Output by size and available heating and cooling utilities"],
     question: "Can a still-water bottle be used for hot filling?",
     answer: "Approve the bottle and cap at the intended temperature. Hot filling requires a package that withstands both heat and the vacuum that can develop as the product cools.",
+    table: bestCrownFillingTables["juice-production-line"],
   },
   "sleeve-labelling": {
     application: "A shrink sleeve wraps around the container before it is heated in a matched tunnel. Full-body sleeves are useful for shaped containers and large graphics. A narrow sleeve can serve as a tamper band where the neck and closure allow it.",
@@ -146,7 +151,7 @@ export const machineGuides: Record<string, BuyerGuide> = {
     answer: "Treatment follows the source and finished-product specification. A natural mineral-water project also needs to preserve the intended mineral profile and comply with applicable requirements.",
   },
   "injection-moulding-machine": {
-    application: "A servo-hydraulic injection press can serve packaging, household or industrial parts depending on the resin, part geometry and mould. Size the clamp for projected area and moulding pressure, then size the injection unit for the real shot and plasticising duty.",
+    application: "The HWAMDA M8-SII family serves packaging, consumer and industrial component projects across different clamp sizes. E-One selects the clamp for projected area and tool fit, then checks shot size, injection rate, pressure and screw recovery for the chosen resin. The energy comparison should be made using the actual production cycle.",
     sizing: {
       "Clamp": "Clamping force in kN, tie-bar spacing, platen and opening stroke",
       "Injection unit": "Usable shot in the actual resin, screw diameter, pressure and rate",
@@ -156,6 +161,7 @@ export const machineGuides: Record<string, BuyerGuide> = {
     enquiry: ["Part drawing, weight, resin grade and cavitation", "Existing mould drawing or new tooling brief", "Cycle target, takeout and power and cooling availability"],
     question: "Is shot weight alone enough to choose a press?",
     answer: "Use it together with clamp force, tool fit, injection pressure, injection rate and screw recovery. A correctly sized shot still needs a machine that can hold and cycle the mould.",
+    table: servoPressTable,
   },
   "gjb-series-high-compressor-homogenize": {
     application: "High-pressure homogenisation forces liquid through a narrow valve to reduce fat globule or particle size. In dairy and suitable beverage recipes, this helps control separation and mouthfeel. Match the valve, pressure and flow to the ingredient and processing temperature.",
@@ -380,6 +386,7 @@ export const machineGuides: Record<string, BuyerGuide> = {
     enquiry: ["Product properties, intended shelf life and distribution temperature", "Package and closure drawings", "Required throughput and validation scope"],
     question: "What proves that an aseptic fill will meet shelf-life requirements?",
     answer: "A project-specific validation programme covers product treatment, the pack and closure, the controlled filling zone and microbiological and shelf-life testing of the finished product.",
+    table: bestCrownFillingTables["aseptic-production-line"],
   },
   "carton-erector": {
     application: "A case erector takes flat corrugated blanks from a magazine, squares them and closes the base for loading. Box quality and blank tolerances affect feeding and reliable sealing. Match the open case to the downstream packer and conveyance.",

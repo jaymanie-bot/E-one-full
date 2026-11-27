@@ -7,7 +7,7 @@ export function LineCards({ slugs = majorSolutions }: { slugs?: string[] }) {
     <div className="cards linecards">
       {selection.map((solution) => (
         <a key={solution.slug} className="family" href={`/solutions/${solution.slug}`}>
-          <div className="photo"><img src={solution.image} alt="" loading="lazy" /></div>
+          <div className={solution.slug === "moulds" || solution.slug === "plastic-injection-cap-compression-machines" ? "photo catalogue-photo" : "photo"}><img src={solution.image} alt="" loading="lazy" /></div>
           <div className="cardHead"><h3>{solution.title}</h3></div>
           <p>{solution.summary}</p>
         </a>

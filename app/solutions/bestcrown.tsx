@@ -1,13 +1,9 @@
+import { PartnerAttribution } from "../partner-attribution";
 import { ComparisonTable } from "../buyer-sections";
 import { bestCrownSupportingTable, bestCrownSystemCards } from "../bestcrown-data";
 
 export function BestCrownPartner() {
-  return (
-    <div className="beverage-partner">
-      <img src="/eone/bestcrown/logo.webp" alt="Best Crown" />
-      <span>E-One’s beverage filling technology partner</span>
-    </div>
-  );
+  return <PartnerAttribution partner="bestcrown" />;
 }
 
 export function BestCrownLineSystems() {

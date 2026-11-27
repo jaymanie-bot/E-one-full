@@ -2,6 +2,7 @@ import { ArrowRight, Search } from "lucide-react";
 import { machineCategories, machineCategoryLabels, machines } from "../catalogue-data";
 import { machineGuides } from "../machine-guides";
 import { MachinePicture } from "../machine-picture";
+import { partners } from "../partners";
 
 export default function Catalogue({ range, query }: { range: string; query: string }) {
   const category = machineCategories.find((name) =>
@@ -16,6 +17,7 @@ export default function Catalogue({ range, query }: { range: string; query: stri
       machine.title,
       machineCategoryLabels[machine.category],
       machine.summary,
+      machine.partner ? partners[machine.partner].name : "",
       ...machine.features,
       ...(machine.specs ?? []).map(({ label, value }) => `${label} ${value}`),
       guide.application,
@@ -72,10 +74,11 @@ export default function Catalogue({ range, query }: { range: string; query: stri
         {results.map((machine) => (
           <article className="machine-card" key={machine.slug}>
             <a className="machine-image" href={`/product/${machine.slug}`} aria-label={`View ${machine.title}`}>
-              <MachinePicture image={machine.image} title={machine.title} />
+              <MachinePicture image={machine.image} title={machine.title} fallbackImage={machine.fallbackImage} />
             </a>
             <div className="machine-card-body">
               <div className="eyebrow">{machineCategoryLabels[machine.category]}</div>
+              {machine.partner && <div className="machine-partner-name">{partners[machine.partner].name}</div>}
               <h2><a href={`/product/${machine.slug}`}>{machine.title}</a></h2>
               <p>{machine.summary}</p>
               <a className="textlink" href={`/product/${machine.slug}`}>

@@ -5,6 +5,7 @@ import { machineBySlug, machineCategoryLabels, machines, solutions } from "../..
 import { quoteUrl } from "../../data";
 import { machineGuides } from "../../machine-guides";
 import { MachinePicture } from "../../machine-picture";
+import { PartnerAttribution } from "../../partner-attribution";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -40,7 +41,7 @@ export default async function MachineDetail({ params }: Props) {
         <div className="machine-detail-grid">
           <figure className="catalogue-figure">
             <div className="machine-visual">
-              <MachinePicture image={machine.image} title={machine.title} />
+              <MachinePicture image={machine.image} title={machine.title} fallbackImage={machine.fallbackImage} />
               <span className="machine-category-badge">{category}</span>
             </div>
             {machine.imageCaption && <figcaption>{machine.imageCaption}</figcaption>}
@@ -49,6 +50,7 @@ export default async function MachineDetail({ params }: Props) {
             <div className="eyebrow"><i />{category}</div>
             <h1>{machine.title}<span>.</span></h1>
             <p className="lede">{machine.summary}</p>
+            {machine.partner && <PartnerAttribution partner={machine.partner} />}
             <div className="actions">
               <a className="btn orange" href={quoteUrl(machine.title)}>
                 Request a quotation <ArrowRight size={17} />
@@ -83,6 +85,20 @@ export default async function MachineDetail({ params }: Props) {
         </div>
       </section>
 
+      {machine.media && machine.media.length > 0 && (
+        <section className="wrap section" aria-labelledby="machine-media">
+          <h2 id="machine-media">Applications and configurations<span>.</span></h2>
+          <div className="machine-media-grid">
+            {machine.media.map((item) => (
+              <figure key={item.image}>
+                <img src={item.image} alt={item.title} loading="lazy"/>
+                <figcaption><h3>{item.title}</h3><p>{item.description}</p></figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
       <BuyerSpecifications guide={guide} specs={machine.specs} title="Technical specifications" source={source || undefined} />
 
       {lineMatches.length > 0 && (
@@ -112,7 +128,7 @@ export default async function MachineDetail({ params }: Props) {
           <div className="related-machines compact">
             {related.map((item) => (
               <a className="related-machine" href={`/product/${item.slug}`} key={item.slug}>
-                <MachinePicture image={item.image} title={item.title} />
+                <MachinePicture image={item.image} title={item.title} fallbackImage={item.fallbackImage} />
                 <div><span>{machineCategoryLabels[item.category]}</span><h3>{item.title}</h3></div>
                 <ArrowRight size={17} />
               </a>

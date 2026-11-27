@@ -1,3 +1,4 @@
+import type { EquipmentPartnerKey } from "./partners";
 import { injectionAncillaries } from "./ancillary-data";
 import { additionalMachines } from "./additional-machines";
 
@@ -15,6 +16,9 @@ export type Machine = {
   specSourceLabel?: string;
   image: string;
   imageCaption?: string;
+  fallbackImage?: string;
+  media?: { image: string; title: string; description: string }[];
+  partner?: EquipmentPartnerKey;
 };
 
 export type MachineCategory =
@@ -164,81 +168,73 @@ export const machines: Machine[] = [
     slug: "carbonated-filling-machine",
     title: "Carbonated Filling Machine",
     category: "Liquid filling",
-    summary: "A DXGF rinsing, filling and capping system for soft drinks, sparkling water, beer and other carbonated products.",
+    partner: "bestcrown",
+    summary: "Best Crown PET carbonated beverage systems with isobaric filling and matched bottle handling.",
     overview: [
-      "The machine combines the three core filling operations in one unit and controls bottle movement to protect fill accuracy and carbonation.",
-      "Its drive and handling systems are designed for stable output with low operating noise.",
+      "For carbonated soft drinks and sparkling water, E-One configures a Best Crown filling system around the required CO₂ level, bottle and closure, product temperature and line output. Isobaric filling brings the container and product circuit to compatible pressure to limit foaming and carbonation loss.",
+      "Best Crown offers a blow–fill–cap combi-block for PET beverage plants and a dual-purpose aseptic configuration for qualifying carbonated and still beverages. Confirm the beverage formulation and container specification before selecting a valve and platform.",
     ],
-    features: [
-      "Integrated washing, filling and capping",
-      "Precise liquid control at high production speed",
-      "Pneumatic bottle conveying and mouth clamping",
-      "Oil-nylon gear drive for stable, lower-noise operation",
-      "Serviceable layout for routine maintenance",
+    features: ["Isobaric mechanical or flowmeter filling-valve options", "Integrated bottle blowing, filling and capping configurations", "Pressure-rated PET bottle and closure handling", "Matched beverage blending, cooling and conveying", "Configuration-specific change parts and controls"],
+    specs: [
+      { label: "Best Crown PET CSD combi-block", value: "8,000–54,000 bottles/hour at 500 mL" },
+      { label: "Reference bottle range", value: "200–1,500 mL" },
     ],
-    image: image("carbonated-filling-machine"),
+    image: "/eone/bestcrown/carbonated-pet.webp",
+    imageCaption: "Best Crown PET CSD blow–fill–cap system, 2022 catalogue, p. 14.",
   },
   {
     slug: "barrel-filling-machine",
     title: "Barrel Filling Machine",
     category: "Liquid filling",
-    summary: "A QGF-series system for washing, filling, capping and sealing large water containers and drums.",
+    partner: "bestcrown",
+    summary: "Best Crown DG5 systems for washing, filling and capping large returnable drinking-water barrels.",
     overview: [
-      "The line is designed for high-volume container handling with controlled dosing, low-drip nozzles and a hygienic product path.",
-      "An integrated weighing option and adjustable filling speed support accurate operation across compatible container formats.",
+      "The DG5 family brings barrel washing, product-water filling and capping into an integrated sequence. E-One plans the external handling and inspection stages so damaged or unsuitable returned containers are separated before the washing system.",
+      "Select the model using the barrel volume, incoming condition, cap design and finished-barrel rate. Match the upstream water treatment, wash services and downstream handling to a single accepted output target.",
     ],
-    features: [
-      "Automated filling sequence",
-      "High-accuracy dosing",
-      "Large-container compatibility",
-      "Hygienic, durable construction",
-      "Adjustable filling speed",
-      "Leak-resistant, non-drip nozzles",
-      "Operator-oriented controls",
-      "Integrated weighing option",
-      "Automatic capping and sealing",
+    features: ["Integrated washing, filling and capping", "Mechanical, flowmeter or ultrasonic-positioning filling-valve options", "Configuration for 12–19 L containers", "Returnable-container inspection and handling interfaces", "Project-specific layout and clean-water supply"],
+    specs: [
+      { label: "Best Crown DG5 output", value: "600–3,000 barrels/hour at 18.9 L" },
+      { label: "Catalogue barrel range", value: "12–19 L" },
     ],
-    specs: [{ label: "Primary format", value: "19-litre water barrels, with other drums subject to configuration" }],
-    image: image("barrel-filling-machine"),
+    image: "/eone/bestcrown/barrel-filling.webp",
+    imageCaption: "Best Crown DG5 five-gallon production line, 2022 catalogue, p. 4.",
   },
   {
     slug: "bottle-water-filling-machine",
     title: "Bottle Water Filling Machine",
     category: "Liquid filling",
-    summary: "A CXGF-series automated system combining bottle rinsing, water filling and capping.",
+    partner: "bestcrown",
+    summary: "Best Crown rinse–fill–cap monoblocks and integrated PET water bottling platforms.",
     overview: [
-      "The machine brings the principal bottling steps into a single controlled platform for hygienic, consistent drinking-water production.",
-      "PLC control, bottle-mouth handling and automatic liquid-level management support reliable operation at production speed.",
+      "E-One selects a Best Crown water filler for still drinking water, compatible mineral or spring water projects and other suitable still-water products. The rinse–fill–cap monoblock manages the bottles through the hygienic filling and closing sequence in a compact unit supplied by a separate bottle blower or pre-made bottles.",
+      "For high-output in-house bottle formation, the integrated blow–fill–cap combi-block is another option. The bottle size, neck finish, treated-water flow, filling valve and closure must be matched to the final output requirement.",
     ],
-    features: [
-      "Integrated rinsing, filling and capping",
-      "High-speed filling with stable liquid control",
-      "Pneumatic conveying and bottle-mouth clamping",
-      "Low-noise operation",
-      "Oil-nylon gear drive",
-      "PLC and touchscreen interface",
-      "Automatic liquid-level control",
-      "Machine safety controls for operators and production",
+    features: ["Integrated rinsing, filling and capping", "Gravity, flowmeter or weighing valve selection", "PET bottle handling matched to format", "Separate bottle supply or blow–fill–cap integration", "Large-volume and qualifying ozone-free options"],
+    specs: [
+      { label: "Best Crown rinse–fill–cap reference", value: "15,000–54,000 bottles/hour at 500 mL" },
+      { label: "Standard monoblock bottle range", value: "200–2,000 mL" },
     ],
-    image: image("bottle-water-filling-machine"),
+    image: "/eone/bestcrown/water-monoblock.webp",
+    imageCaption: "Best Crown water rinse–fill–cap monoblock, 2022 catalogue.",
   },
   {
     slug: "juice-filling-machine-hot-filling",
     title: "Juice Filling Machine (Hot Filling)",
     category: "Liquid filling",
-    summary: "A configurable filling platform for hygienic hot filling of juice and juice-based beverages.",
+    partner: "bestcrown",
+    summary: "Best Crown PET hot-fill equipment for suitable juice, tea and functional beverage formulations.",
     overview: [
-      "The machine is intended for integration after juice preparation and thermal treatment, carrying heated product into compatible containers under controlled conditions.",
-      "Final configuration is selected around the product, container, target output and the surrounding capping and packaging equipment.",
+      "E-One and Best Crown configure hot filling as part of the complete processing and bottling line. A suitable product treatment system supplies the enclosed filler; the selected bottle and closure must withstand the approved filling and cooling conditions.",
+      "The catalogue also includes fruit-particle filling arrangements. Share the formulation, viscosity, maximum suspended-particle size and bottle neck so E-One can match the valve, product-transfer system and finished output.",
     ],
-    features: [
-      "Hot-fill process compatibility",
-      "Flexible line configuration",
-      "Integration with capping, coding and packaging equipment",
-      "Built for dependable commercial production",
-      "Project-specific output and container handling",
+    features: ["Controlled filling-temperature system", "Micro-negative-pressure, flowmeter or weighing valve configurations", "Bottle and closure selection for hot filling", "Cleaning and line-control integration", "Fruit-particle configurations assessed separately"],
+    specs: [
+      { label: "Best Crown PET hot-fill line", value: "10,000–54,000 bottles/hour at 500 mL" },
+      { label: "Catalogue bottle range", value: "200–2,000 mL" },
     ],
-    image: image("juice-filling-machine-hot-filling"),
+    image: "/eone/bestcrown/hot-fill-juice.webp",
+    imageCaption: "Best Crown PET hot-fill production line, 2022 catalogue, p. 9.",
   },
   {
     slug: "sleeve-labelling",
@@ -283,22 +279,32 @@ export const machines: Machine[] = [
     slug: "injection-moulding-machine",
     title: "Injection Moulding Machine",
     category: "Injection machines",
-    summary: "A servo-hydraulic injection platform for packaging, household and industrial plastic components.",
+    partner: "hwamda",
+    summary: "HWAMDA M8-SII servo-hydraulic presses for household products, industrial parts and packaging components.",
     overview: [
-      "Configurable material and mould settings support varied component designs and faster changeovers between production requirements.",
-      "An advanced servo motor and optimized hydraulic system are used to reduce energy demand while maintaining moulding performance.",
+      "E-One supplies HWAMDA injection presses configured to produce plastic components in the volume and quality your factory requires. The M8-SII platform combines a servo-driven hydraulic pump, a reinforced clamping assembly and a configurable injection unit. Select the machine using the actual mould envelope, resin, projected area and shot requirement—not tonnage alone.",
+      "The servo system varies pump delivery to the demand of each cycle stage. This supports controlled injection and holding pressure and reduces unnecessary power demand during less active phases. E-One reviews the real cycle, cooling load, changeovers and WENSUI ancillary equipment when specifying your complete cell.",
     ],
     features: [
-      "Broad material and product-format flexibility",
-      "Quick mould-change support",
-      "Servo-driven control",
-      "Optimized hydraulic system",
-      "Suitable for medical, packaging and consumer-goods applications",
+      "M8-SII servo-hydraulic press family with 25 published clamping-force models",
+      "Reinforced platens and automatic mould adjustment",
+      "Matched screw and injection-unit options for different shot sizes",
+      "Closed-loop servo-hydraulic control",
+      "Controller and guarding configured for the machine",
+      "Integration with resin preparation, mould cooling and automation",
     ],
-    specs: [{ label: "Yizumi A6 reference clamping force", value: "900–10,000 kN, by model" }],
-    image: image("injection-moulding-machine"),
-    specSource: "https://www.yizumi.com/en/ims/A6-Advanced-And-Intelligent-Injection-Molding-Machine",
-    specSourceLabel: "Yizumi A6 series specifications",
+    specs: [
+      { label: "HWAMDA M8-SII clamping force", value: "900–33,000 kN across 25 models" },
+      { label: "Machine configuration", value: "Matched clamp, injection unit and screw option" },
+    ],
+    image: "/eone/hwamda/m8sii-hmd320.webp",
+    imageCaption: "HWAMDA HMD320M8-SII servo-hydraulic machine, official manufacturer model photograph.",
+    media: [
+      { image: "/eone/hwamda/m8sii-clamp.webp", title: "M8-SII mould space", description: "Clamping-side reference from HWAMDA's pail catalogue. Review the dimensions and tool-mounting interface of the selected model." },
+      { image: "/eone/hwamda/assembly-floor.webp", title: "HWAMDA manufacturing reference", description: "Photograph from the manufacturer’s M8-SII assembly reference. E-One configures the press with the required material-handling and cooling package." },
+    ],
+    specSource: "https://hwamdaglobal.com/en/injection-molding-machines/servo-hydraulic/",
+    specSourceLabel: "HWAMDA M8-SII model specifications",
   },
   {
     slug: "gjb-series-high-compressor-homogenize",
@@ -588,12 +594,14 @@ export const solutions: Solution[] = [
   {
     slug: "plastic-injection-cap-compression-machines",
     title: "Total Injection Machines",
-    image: "/eone/plastic-injection.webp",
-    summary: "Complete plastics production cells for PET preforms, caps, pails, thin-wall packaging and other moulded components.",
+    image: "/eone/hwamda/m8sii-hmd320.webp",
+    imageAlt: "HWAMDA HMD320M8-SII servo-hydraulic injection moulding machine",
+    imageCaption: "HWAMDA HMD320M8-SII general-purpose press, manufacturer model reference.",
+    summary: "Complete plastics production cells built around HWAMDA injection machines, WENSUI auxiliary equipment and precision tooling.",
     overview: [
-      "The portfolio combines injection moulding for PET preforms and other components with compression moulding for beverage and packaging caps.",
-      "Machine configuration is selected around material, mould, part geometry, cycle requirements and the required level of production flexibility.",
-      "Applications extend across beverage, edible oil, personal care, household and industrial packaging.",
+      "HWAMDA is E-One’s principal injection machinery partner. The M8-SII servo-hydraulic range serves a broad variety of moulded plastic products, while the dedicated HMD PET and pail configurations address preform and thin-wall packaging requirements. Our separately specified cap compression option remains available for appropriate closure projects.",
+      "E-One engineers the cell around the machine, mould and finished product. We review the resin, shot size, mould envelope, clamp force, target cycle and part-handling needs. WENSUI resin preparation, robot takeout, cooling, conveying and regrind equipment can then be selected as a coordinated ancillary package.",
+      "Typical projects include PET preforms for water and beverage bottles, paint and industrial pails, consumer goods, housewares, closures and plastic packaging. Each quoted output is tied to an approved material, part, mould and cycle.",
     ],
     stages: [
       { title: "Define the component", body: "Confirm resin, geometry, tolerances, colour and expected production volume." },
@@ -625,18 +633,20 @@ export const solutions: Solution[] = [
   {
     slug: "moulds",
     title: "Moulds",
-    image: "/eone/hero-moulds.webp",
-    summary: "Precision moulds specified around your product drawing, resin, machine and target cycle.",
+    image: "/eone/heyan/preform-mould.webp",
+    imageAlt: "Heyan multi-cavity preform mould with its core, takeout and cavity plates",
+    imageCaption: "Heyan precision preform tooling, supplied manufacturer catalogue, p. 3.",
+    summary: "Precision tooling from Heyan Moulds, E-One’s principal mould partner. PET preforms, rotary and linear bottle-blow moulds, caps, handles and lifting rings.",
     overview: [
-      "E-One works with its mould technology partner to scope tooling for PET preforms, closures and custom plastic components. Start with a drawing or sample, material grade, expected volume and the proposed production machine.",
-      "A mould design review covers cavity balance, cooling, ejection and maintenance access. For preforms and caps, verify the neck finish and mating dimensions so the tooling fits the bottle and closure system.",
-      "Agree on sample approval and acceptance criteria up front. Trial parts let the team check critical dimensions, weight and finish against the drawing before releasing the tool to production.",
+      "With Foshan Heyan Precision Mold Technology, E-One helps plastic and beverage manufacturers specify new moulds, replace existing tooling and develop new pack formats. Heyan’s catalogue includes needle-valve hot-runner preform moulds from 1 to 144 cavities, as well as bottle blowing, closure, handle and lifting-ring tooling.",
+      "The mould is as important as the machine that carries it. We start with the product drawing or sample, resin, desired weight, neck and closure interface, production target and available press or blower. The resulting specification addresses cavity count, cooling, ejection, hot-runner control, tool fit and maintainability.",
+      "Heyan's packaging applications include bottled water, carbonated drinks, juices, edible oils, food and personal-care packaging. Tooling for PET, PP, PC and Tritan is assessed against the intended material and component. Agree sample approvals, replaceable inserts, spare wear parts and trial acceptance criteria before ordering.",
     ],
     stages: [
-      { title: "PET preform moulds", body: "Match preform weight, neck finish and cavity count to the injection press and downstream bottle design." },
-      { title: "Closure moulds", body: "Specify thread, sealing geometry and any tamper-evident features around the intended bottle neck." },
-      { title: "Custom component moulds", body: "Review wall thickness, surface finish, tolerances, parting lines and ejection for the target component." },
-      { title: "Bottle blowing moulds", body: "Match the mould to the bottle drawing, cavity layout and linear or rotary blow-moulding machine." },
+      { title: "Design the pack or part", body: "Agree the 3D drawing, resin, weight, neck finish, mating parts, appearance and dimensional tolerances." },
+      { title: "Engineer the tool", body: "Confirm cavities, runner and gate design, material, cooling, ejection, replaceable inserts and moulding machine interface." },
+      { title: "Trial and approve", body: "Review mould-trial samples, cavity variation, neck or closure fit and the cycle on the intended product." },
+      { title: "Support production", body: "Plan mounting, controller connections, spares, changeover and ongoing maintenance as part of the E-One project." },
     ],
     relatedMachines: ["pet-preform-injection-moulding-machine", "injection-moulding-machine", "pail-injection-moulding-machine", "cap-compression-machine", "automatic-linear-bottle-blowing-machine"],
   },
@@ -648,7 +658,7 @@ export const solutions: Solution[] = [
     imageCaption: "Best Crown complete-line conveyor arrangement, 2022 equipment catalogue, p. 23.",
     summary: "E-One and Best Crown deliver integrated beverage line configurations for bottled water, carbonated drinks, juice, aseptic beverages and dairy.",
     overview: [
-      "Langfang BestCrown Packing Machinery Co., Ltd. is E-One's beverage filling technology partner. Its catalogue covers complete PET drinking-water, carbonated-beverage, fruit juice, tea, protein drink and dairy production systems, with clean, ultra-clean and aseptic filling options.",
+      "Langfang BestCrown Packing Machinery Co., Ltd. is E-One’s principal beverage filling turnkey partner. Its catalogue covers complete PET drinking-water, carbonated-beverage, fruit juice, tea, protein drink and dairy production systems, with clean, ultra-clean and aseptic filling options.",
       "E-One combines the beverage preparation, bottle formation, filling and downstream equipment around the required finished-pack rate. Choose an integrated blow–fill–cap combi-block where it fits the product and capacity, or a filling monoblock with a separate bottle supply arrangement.",
       "Project planning includes the raw-material and product-property review, bottle and closure drawings, equipment layout, utilities and changeover arrangements. Agree the operating targets, inspection requirements, acceptance programme, commissioning and operator training scope before ordering.",
     ],
