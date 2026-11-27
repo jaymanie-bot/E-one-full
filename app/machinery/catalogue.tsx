@@ -1,5 +1,6 @@
 import { ArrowRight, Search } from "lucide-react";
 import { machineCategories, machineCategoryLabels, machines } from "../catalogue-data";
+import { machineGuides } from "../machine-guides";
 import { MachinePicture } from "../machine-picture";
 
 export default function Catalogue({ range, query }: { range: string; query: string }) {
@@ -10,12 +11,16 @@ export default function Catalogue({ range, query }: { range: string; query: stri
   const search = query.trim().toLowerCase();
   const results = machines.filter((machine) => {
     const inCategory = category === "All machines" || machine.category === category;
+    const guide = machineGuides[machine.slug];
     const searchable = [
       machine.title,
       machineCategoryLabels[machine.category],
       machine.summary,
       ...machine.features,
       ...(machine.specs ?? []).map(({ label, value }) => `${label} ${value}`),
+      guide.application,
+      ...Object.values(guide.sizing),
+      ...(guide.table?.rows.flat() ?? []),
     ].join(" ").toLowerCase();
     return inCategory && (!search || searchable.includes(search));
   });
@@ -32,7 +37,7 @@ export default function Catalogue({ range, query }: { range: string; query: stri
       <a className="back" href="/">Home /</a>
       <div className="eyebrow"><i />EQUIPMENT DIRECTORY</div>
       <h1>Machinery catalogue<span>.</span></h1>
-      <p className="lede">Browse {machines.length} machines by category. Open any product to see its application, features and technical details.</p>
+      <p className="lede">Browse {machines.length} machines by category, application or model. Open a machine to compare specifications and prepare your enquiry.</p>
 
       <div className="catalogue-tools">
         <form action="/machinery" method="get" className="search catalogue-search" role="search">

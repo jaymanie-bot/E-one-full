@@ -1,4 +1,5 @@
 import { injectionAncillaries } from "./ancillary-data";
+import { additionalMachines } from "./additional-machines";
 
 export type Specification = { label: string; value: string };
 
@@ -11,7 +12,9 @@ export type Machine = {
   features: string[];
   specs?: Specification[];
   specSource?: string;
+  specSourceLabel?: string;
   image: string;
+  imageCaption?: string;
 };
 
 export type MachineCategory =
@@ -28,12 +31,12 @@ export type Solution = {
   slug: string;
   title: string;
   image: string;
+  imageAlt?: string;
+  imageCaption?: string;
   summary: string;
   overview: string[];
   stages: { title: string; body: string }[];
-  performanceNote?: string;
   relatedMachines: string[];
-  specs?: Specification[];
   liquids?: { title: string; body: string }[];
   subsolutions?: string[];
 };
@@ -74,8 +77,6 @@ export const machines: Machine[] = [
       "Adjustable airflow and outlet position in the shrink tunnel",
       "Touchscreen controls for production settings",
       "Compact arrangement with accessible service points",
-      "Source material reports 30% lower power use than the preceding model",
-      "Industrial electrical detection components for stable operation",
     ],
     image: image("shrink-packaging-machine"),
   },
@@ -83,10 +84,10 @@ export const machines: Machine[] = [
     slug: "laser-coding-machine",
     title: "Laser Coding Machine",
     category: "Coding machines",
-    summary: "A non-contact system for permanent production codes on PET, glass, aluminium cans and cartons.",
+    summary: "Non-contact marking for production codes on compatible bottles, cans and cartons.",
     overview: [
       "The laser marks batch details, expiry dates, barcodes and QR codes directly onto the packaging surface.",
-      "Because the process does not use ink or solvent, it suits fast production lines that need durable, tamper-resistant identification.",
+      "The process marks the surface without ink or solvent. Test the proposed material and code at the intended conveyor speed.",
     ],
     features: [
       "Permanent, legible production marks",
@@ -96,25 +97,6 @@ export const machines: Machine[] = [
       "No ink or solvent consumables",
     ],
     image: image("laser-coding-machine"),
-  },
-  {
-    slug: "inkjet-coding-machine",
-    title: "Inkjet Coding Machine",
-    category: "Coding machines",
-    summary: "A high-speed, non-contact ink system for applying traceability information to beverage packaging.",
-    overview: [
-      "The system prints batch numbers, expiry dates, barcodes and logos while packaging continues along the line.",
-      "Automatic monitoring, quick setup and a simplified service arrangement are intended to limit interruptions during production.",
-    ],
-    features: [
-      "High-quality ink output at line speed",
-      "Automatic operating-status monitoring",
-      "Quick setup for shorter changeovers",
-      "Menu-led operation for production teams",
-      "Single-part servicing approach",
-      "Solvent-saving system designed to reduce consumption and waste",
-    ],
-    image: image("inkjet-coding-machine"),
   },
   {
     slug: "cap-compression-machine",
@@ -140,7 +122,7 @@ export const machines: Machine[] = [
     slug: "automatic-rotary-bottle-blowing-machine",
     title: "Automatic Rotary Bottle Blowing Machine",
     category: "Bottle blowing",
-    summary: "A high-output rotary blow-moulding platform for producing plastic bottles in multiple formats.",
+    summary: "A high-output rotary stretch-blow platform for producing PET bottles in multiple formats.",
     overview: [
       "The machine handles preforms continuously through the heating and blowing process, supporting stable large-scale bottle production.",
       "It is presented for food and beverage, cosmetics, pharmaceutical and chemical packaging applications.",
@@ -149,16 +131,18 @@ export const machines: Machine[] = [
       "Continuous rotary preform movement",
       "Configurable for different bottle shapes and sizes",
       "Designed for stable, energy-conscious production",
-      "Supports PET, PE, PVC and PP formats where configured",
+      "PET preform and bottle handling matched to the mould and format",
     ],
-    specs: [{ label: "Stated output range", value: "8,000–36,000 bottles per hour, model dependent" }],
+    specs: [{ label: "E-One published machine range", value: "8,000–36,000 bottles/hour, by model and format" }],
+    specSource: "https://e-onemachinery.com/product/automatic-rotary-bottle-blowing-machine/",
+    specSourceLabel: "E-One rotary blower reference",
     image: image("automatic-rotary-bottle-blowing-machine"),
   },
   {
     slug: "automatic-linear-bottle-blowing-machine",
     title: "Automatic Linear Bottle Blowing Machine",
     category: "Bottle blowing",
-    summary: "A linear blow-moulding machine for medium-speed production of plastic bottles in varied shapes and sizes.",
+    summary: "An automatic linear stretch-blow machine for medium-speed PET bottle production.",
     overview: [
       "The platform uses a rigid single-plate steel frame to support repeatable forming and long-term machine stability.",
       "Its pressure-recovery arrangement reuses part of the high-pressure gas and reduces reliance on a separate low-pressure air system.",
@@ -167,31 +151,14 @@ export const machines: Machine[] = [
       "Medium-speed linear bottle production",
       "Single-piece steel frame for rigidity and precision",
       "High-pressure gas recovery to reduce operating demand",
-      "Supports PET, PE, PVC and PP formats where configured",
+      "PET preform and bottle handling with format-specific change parts",
     ],
     specs: [
-      { label: "Stated output range", value: "3,000–8,000 bottles per hour, model dependent" },
-      { label: "Gas recovery", value: "Up to 25% of high-pressure gas" },
+      { label: "E-One published machine range", value: "3,000–8,000 bottles/hour, by model and format" },
     ],
     image: image("automatic-linear-bottle-blowing-machine"),
-  },
-  {
-    slug: "glass-bottle-filling-machine",
-    title: "Glass Bottle Filling Machine",
-    category: "Liquid filling",
-    summary: "A stainless-steel BXGF filling platform for filling, capping and sealing beverages in glass bottles.",
-    overview: [
-      "The system is designed around hygienic product handling, consistent filling and reduced waste on glass-bottle lines.",
-      "Bottle separation and variable-speed control support a controlled flow through the machine.",
-    ],
-    features: [
-      "Stainless-steel construction",
-      "Screw-based bottle separation",
-      "Frequency control with digital display",
-      "Hygienic internal geometry designed to avoid debris-trapping edges",
-      "Integrated filling, capping and sealing workflow",
-    ],
-    image: image("glass-bottle-filling-machine"),
+    specSource: "https://e-onemachinery.com/product/automatic-linear-bottle-blowing-machine/",
+    specSourceLabel: "E-One linear blower reference",
   },
   {
     slug: "carbonated-filling-machine",
@@ -307,14 +274,16 @@ export const machines: Machine[] = [
       "Corrosion-resistant stainless-steel frame",
       "Capacity selected to the production requirement",
     ],
-    specs: [{ label: "Available capacity", value: "1–50 tonnes per hour" }],
+    specs: [{ label: "E-One published range", value: "1–50 tonnes/hour. Confirm permeate output on the proposed feed water." }],
     image: image("reverse-osmosis-ro-water-treatment-system"),
+    specSource: "https://e-onemachinery.com/product/reverse-osmosis-ro-water-treatment-system/",
+    specSourceLabel: "E-One reverse-osmosis reference",
   },
   {
     slug: "injection-moulding-machine",
     title: "Injection Moulding Machine",
     category: "Injection machines",
-    summary: "A flexible plastic injection platform for repeatable, high-volume production across multiple industries.",
+    summary: "A servo-hydraulic injection platform for packaging, household and industrial plastic components.",
     overview: [
       "Configurable material and mould settings support varied component designs and faster changeovers between production requirements.",
       "An advanced servo motor and optimized hydraulic system are used to reduce energy demand while maintaining moulding performance.",
@@ -326,59 +295,10 @@ export const machines: Machine[] = [
       "Optimized hydraulic system",
       "Suitable for medical, packaging and consumer-goods applications",
     ],
+    specs: [{ label: "Yizumi A6 reference clamping force", value: "900–10,000 kN, by model" }],
     image: image("injection-moulding-machine"),
-  },
-  {
-    slug: "bottle-unscrambler",
-    title: "Bottle Unscrambler",
-    category: "Auxiliary machines",
-    summary: "An automatic infeed machine that takes randomly loaded empty bottles and presents them upright to the line.",
-    overview: [
-      "Bulk plastic bottles enter from bins or crates before the machine separates, orients and sequences them.",
-      "The upright bottles are transferred onto the conveyor ready for rinsing or filling.",
-    ],
-    features: [
-      "Receives bulk empty bottles",
-      "Separates tangled or mixed bottles",
-      "Automatically orients bottles upright",
-      "Feeds bottles sequentially to the conveyor",
-      "Designed for integration into PET filling lines",
-    ],
-    image: image("bottle-unscrambler"),
-  },
-  {
-    slug: "cxj-series-surf-fruit-cleaner",
-    title: "CXJ Series Surf Fruit Cleaner",
-    category: "Auxiliary machines",
-    summary: "A fruit-washing system that uses water movement and bubbles to remove surface dirt and residues gently.",
-    overview: [
-      "The cleaner prepares fruit for downstream juice processing while limiting harsh mechanical handling.",
-      "It can be integrated ahead of extraction and pulping equipment in a beverage preparation line.",
-    ],
-    features: [
-      "Bubble-assisted surface washing",
-      "Gentle handling for fruit processing",
-      "Removal of loose dirt and surface residues",
-      "Designed for integration with juice-preparation equipment",
-    ],
-    image: image("cxj-series-surf-fruit-cleaner"),
-  },
-  {
-    slug: "dj-series-beater",
-    title: "DJ Series Beater",
-    category: "Auxiliary machines",
-    summary: "A preparation machine for breaking down fruit and pulp into a smoother, more consistent process feed.",
-    overview: [
-      "The beater refines incoming fruit material before later extraction, homogenization or blending stages.",
-      "It is positioned as part of a juice and beverage preparation system selected around the raw material and desired texture.",
-    ],
-    features: [
-      "Fruit and pulp breakdown",
-      "More uniform process texture",
-      "Integration before extraction or blending",
-      "Configuration matched to the raw ingredient",
-    ],
-    image: image("dj-series-beater"),
+    specSource: "https://www.yizumi.com/en/ims/A6-Advanced-And-Intelligent-Injection-Molding-Machine",
+    specSourceLabel: "Yizumi A6 series specifications",
   },
   {
     slug: "gjb-series-high-compressor-homogenize",
@@ -396,23 +316,6 @@ export const machines: Machine[] = [
       "Integration with beverage preparation and filling lines",
     ],
     image: image("gjb-series-high-compressor-homogenize"),
-  },
-  {
-    slug: "ly-series-cold-drink-tank",
-    title: "LY Series Cold Drink Tank",
-    category: "Auxiliary machines",
-    summary: "A chilled holding and supply tank for maintaining beverage temperature and pressure before filling.",
-    overview: [
-      "The tank stores prepared cold or carbonated drink and supplies it to the filling machine under controlled conditions.",
-      "Maintaining the appropriate temperature and pressure supports carbonation stability during high-speed filling.",
-    ],
-    features: [
-      "Chilled beverage holding",
-      "Controlled supply to the filling machine",
-      "Temperature management before filling",
-      "Pressure conditions suited to carbonated products",
-    ],
-    image: image("ly-series-cold-drink-tank"),
   },
   {
     slug: "lz-1-5-type-spiral-juice-extractor",
@@ -520,132 +423,173 @@ export const machines: Machine[] = [
     image: image("djm-vertical-colloid-mill"),
   },
   ...injectionAncillaries,
+  ...additionalMachines,
 ];
 
 export const solutions: Solution[] = [
   {
     slug: "bottled-water-production-line",
     title: "Turnkey Bottled Water Production",
-    image: "/eone/bottled-water-line.webp",
-    summary: "A complete PET water line covering bottle formation, purification, filling, labelling, coding and final packaging.",
+    image: "/eone/bestcrown/water-combiblock.webp",
+    imageAlt: "Best Crown stainless-steel PET water blow–fill–cap equipment in a production facility",
+    imageCaption: "Best Crown integrated PET water combi-block, 2022 catalogue, pp. 1–2.",
+    summary: "Complete PET water production, from purification and bottle forming to filling and packing. Best Crown combi-block references reach 72,000 bottles/hour at 500 mL.",
     overview: [
-      "Preforms are heated and stretch-blown on site, giving producers control over bottle design while reducing the storage and transport burden associated with empty bottles. An air conveyor moves the finished containers into the filling section.",
-      "Raw water passes through configured filtration, reverse osmosis and UV or ozone treatment before entering the clean filling and capping environment.",
-      "Filled bottles continue through the selected sleeve, sticker or OPP labelling system. Laser or inkjet coding adds the production date, batch and expiry details before shrink wrapping, tray packing or carton boxing.",
-      "The modular layout supports capacity growth, access for maintenance and integration with plant utilities and end-of-line logistics.",
+      "With Best Crown, E-One can configure a standalone rinse–fill–cap machine or an integrated blow–fill–cap combi-block. The integrated layout carries preforms through bottle formation, filling and capping in one machine, reducing intermediate empty-bottle transfers, accumulation and storage. A separate blower and filling monoblock allows more flexibility in bottle supply and layout.",
+      "The water-treatment system is selected from the source-water analysis and finished-product specification. The treatment train combines suitable pretreatment, advanced purification and final treatment, then supplies the filler through a clean storage and transfer system. An ozone-free water combi-block can be evaluated for qualifying mineral or spring-water projects.",
+      "Best Crown's filling options include gravity mechanical valves, flowmeter valves and weighing-based configurations for compatible large-volume formats. Confirm the neck finish, fill accuracy, valve selection and change parts for each bottle size.",
+      "Filled bottles continue through the selected sleeve or OPP labelling system. Laser coding can add production date, batch and expiry details to suitable packaging before shrink wrapping, tray packing or carton boxing.",
     ],
     stages: [
-      { title: "Form the bottle", body: "Heat and stretch-blow PET preforms, then transfer the containers on a clean air conveyor." },
-      { title: "Treat the water", body: "Configure filtration, reverse osmosis and disinfection around the source-water analysis." },
-      { title: "Fill and close", body: "Rinse, fill and cap in a controlled system designed around the bottle and output target." },
-      { title: "Label and pack", body: "Apply labels and traceability codes before wrapping, cartoning or pallet preparation." },
-    ],
-    specs: [
-      { label: "Pack format", value: "PET bottles with a matched cap and neck finish" },
-      { label: "Water treatment", value: "Filtration, RO and UV or ozone based on feed-water analysis" },
-      { label: "Reference bottle-blower output", value: "Linear 3,000–8,000 BPH · rotary 8,000–36,000 BPH, by model" },
-      { label: "Finished line capacity", value: "Quoted in bottles/hour for each bottle size, based on the filler and downstream equipment" },
+      { title: "Treat the source water", body: "Review the source and product specification, then select filtration, RO or other required treatment, disinfection, storage and transfer." },
+      { title: "Form or feed bottles", body: "Choose in-house PET stretch blowing with either integrated filling or air conveying to a monoblock. Ready-made bottle supply can also be evaluated." },
+      { title: "Fill and cap", body: "Select the rinse–fill–cap or blow–fill–cap platform and valves for bottle volume, hygienic transfer, closure integrity and target output." },
+      { title: "Inspect, label and pack", body: "Check fill level and cap, apply sleeve or OPP labels and traceability codes, then shrink-wrap, carton and palletise as specified." },
     ],
     liquids: [
       { title: "Still drinking and purified water", body: "The standard application. Treatment and sanitation are selected around the incoming water quality and finished product." },
-      { title: "Still mineral or flavoured water", body: "Mineral water requires a treatment design matched to its source and product requirements. Flavoured water may need blending and a different hygienic filling configuration." },
-      { title: "Sparkling water or juice", body: "Sparkling water needs a pressure filler. Juice may require thermal processing and a hot-fill or aseptic system, depending on shelf life." },
+      { title: "Mineral and spring water", body: "Best Crown lists both mineral and spring water among its PET water applications, including a dedicated ozone-free option. Preserve the required product profile and select the approved treatment." },
+      { title: "Still enhanced water", body: "Added minerals, electrolytes or flavour can change the blending, cleaning and filling requirements. Share the recipe and storage instructions before configuring the line." },
     ],
-    relatedMachines: ["automatic-rotary-bottle-blowing-machine", "automatic-linear-bottle-blowing-machine", "reverse-osmosis-ro-water-treatment-system", "bottle-water-filling-machine", "oop-labelling-machine", "sleeve-labelling", "laser-coding-machine", "inkjet-coding-machine", "shrink-packaging-machine"],
+    relatedMachines: ["automatic-linear-bottle-blowing-machine", "automatic-rotary-bottle-blowing-machine", "bottle-water-filling-machine", "reverse-osmosis-ro-water-treatment-system", "ultrafiltration-water-treatment-system", "oop-labelling-machine", "sleeve-labelling", "laser-coding-machine", "shrink-packaging-machine", "carton-packer", "automatic-palletizer"],
   },
   {
     slug: "carbonated-drink-production-line",
     title: "Turnkey Carbonated Drink Production",
-    image: "/eone/carbonated-drink-line.webp",
-    summary: "An integrated line for carbonated drinks in PET, glass or cans, from water preparation and mixing to filling and packaging.",
+    image: "/eone/bestcrown/carbonated-pet.webp",
+    imageAlt: "Best Crown PET carbonated drink blowing, filling and capping combination machine",
+    imageCaption: "Best Crown PET CSD blow–fill–cap combination system, 2022 catalogue, p. 14.",
+    summary: "Pressure filling for soft drinks and sparkling beverages in PET bottles, with Best Crown combi-block capacity references up to 54,000 BPH at 500 mL.",
     overview: [
-      "PET formats can begin with in-house bottle blowing, while glass bottles and cans enter through their dedicated handling and filling equipment.",
-      "Treated water is chilled and combined with syrup and CO₂ under controlled temperature and pressure. Isobaric filling helps preserve carbonation and limit foaming.",
-      "The configured closer or can seamer is followed by labelling, traceability coding and the selected retail or bulk packaging format.",
-      "Automation and multi-format equipment allow the line to serve both mass-market drinks and premium sparkling products.",
+      "A complete soft-drink line brings together source-water treatment, syrup preparation, proportioning, product cooling, carbonation and pressure filling. Pure sparkling-water recipes can use a different blending arrangement from flavoured soft drinks. The treated drink is delivered to the filler at the agreed product conditions.",
+      "Best Crown's PET CSD combi-block integrates bottle formation with isobaric filling and capping. It offers equal-pressure mechanical or flowmeter valves by configuration. In the supported bottle range, match the preform, pressure-rated bottle and closure to the carbonated product.",
+      "For sensitive carbonated and still beverages, Best Crown also references a dual-purpose aseptic platform with flowmeter filling and aseptic servo capping. Its hygiene and product-treatment requirements must be assessed for the actual recipe and intended shelf life.",
+      "The finished bottle moves through inspection, labelling, coding, accumulation and secondary packing. E-One reviews foam, CO₂ retention, fill accuracy and cap performance using the actual drink and package before agreeing the completed-line output.",
     ],
     stages: [
-      { title: "Prepare containers", body: "Blow PET bottles on site or feed the line with compatible glass bottles or cans." },
-      { title: "Mix and carbonate", body: "Treat water, proportion syrup and dissolve CO₂ under controlled process conditions." },
-      { title: "Fill under pressure", body: "Use isobaric filling to protect carbonation and achieve repeatable fill levels." },
-      { title: "Close and pack", body: "Cap or seam, code and label each container before secondary packaging." },
-    ],
-    specs: [
-      { label: "Pack formats", value: "PET, glass or cans with format-specific filling and closing equipment" },
-      { label: "Process", value: "Water treatment, chilling, recipe blending, CO₂ dosing and isobaric filling" },
-      { label: "Reference PET blower output", value: "8,000–36,000 bottles/hour for the listed rotary blower range" },
-      { label: "Finished line capacity", value: "Quoted in bottles or cans/hour for the recipe, temperature, carbonation and pack size" },
+      { title: "Prepare the drink", body: "Treat water, prepare syrup where required, blend the recipe and configure the deaeration, cooling and carbonation equipment." },
+      { title: "Form the pressure-rated bottle", body: "Match PET preforms, bottle moulds and neck finish to the product, cap and integrated or separate blowing arrangement." },
+      { title: "Fill under pressure", body: "Select the isobaric valve technology and matched capper around the beverage carbonation, temperature, foam behaviour and output." },
+      { title: "Inspect and pack", body: "Check fill, closure and codes, label the containers, then shrink-wrap or carton for dispatch." },
     ],
     liquids: [
       { title: "Carbonated soft drinks", body: "Cola, citrus and other flavoured sodas can use a syrup-mixing and carbonation setup matched to the recipe." },
-      { title: "Sparkling water and other fizzy drinks", body: "Unsweetened sparkling water, tonic and carbonated energy drinks can be evaluated against their ingredients, carbonation and package." },
-      { title: "Beer or other foam-sensitive drinks", body: "Confirm the filler, oxygen-control requirements and cleaning process for the product before choosing the configuration." },
+      { title: "Sparkling mineral and soda water", body: "The Best Crown PET CSD catalogue includes sparkling mineral water and sparkling soda. Confirm the product CO₂ target and pressure-rated bottle." },
+      { title: "Carbonated juice and sensitive drinks", body: "Sparkling juice and other sensitive formulations require a review of acidity, particles, foam and the filling hygiene route before selecting the platform." },
+      { title: "Malt and other foam-sensitive beverages", body: "Evaluate compatibility, oxygen control, product treatment and pack performance for these recipes before agreeing a line configuration." },
     ],
-    relatedMachines: ["automatic-rotary-bottle-blowing-machine", "qhs-drink-mixer", "tq-2-vacuum-deaerator", "ly-series-cold-drink-tank", "carbonated-filling-machine", "glass-bottle-filling-machine", "oop-labelling-machine", "laser-coding-machine", "shrink-packaging-machine"],
+    relatedMachines: ["reverse-osmosis-ro-water-treatment-system", "qhs-drink-mixer", "tq-2-vacuum-deaerator", "dth-series-electrothermal-sugar-melting-boiler", "automatic-rotary-bottle-blowing-machine", "carbonated-filling-machine", "oop-labelling-machine", "sleeve-labelling", "laser-coding-machine", "shrink-packaging-machine", "carton-packer", "automatic-palletizer"],
+  },
+  {
+    slug: "aseptic-production-line",
+    title: "Turnkey Aseptic Beverage Production",
+    image: "/eone/bestcrown/aseptic-gwjx.webp",
+    imageAlt: "Best Crown GWJX dry aseptic PET blow–fill–cap combination equipment",
+    imageCaption: "Best Crown GWJX dry aseptic PET combi-block, 2022 catalogue, p. 6.",
+    summary: "Sensitive-beverage processing and aseptic PET filling with Best Crown dry aseptic combi-block and cold-fill monoblock configurations.",
+    overview: [
+      "E-One works with Best Crown to configure the product-treatment and filling system around the intended beverage. A validated thermal process prepares the product, and a controlled product circuit transfers it to the filling zone. Package and closure treatment, filling-zone management and seal integrity are integral to the delivery scope.",
+      "Best Crown's GWJX dry aseptic combi-block integrates PET bottle formation, package preparation, filling and closing. Its aseptic cold-fill monoblock can be evaluated where bottles are formed separately. The manufacturer also offers an ultra-clean platform for suitable products with different treatment and distribution requirements.",
+      "Choose the filling valve and equipment configuration around actual pH, viscosity, fibres or particles. Low-acid milk and protein beverages need a different validated treatment scope from many acidic juices. The catalogue includes both flowmeter and electronic weighing configurations for aseptic filling.",
+      "Agree the process and packaging validation, cleaning and sterilisation interfaces, monitoring, product changeovers and acceptance testing with the project team. Confirm finished-product quality and shelf life under the intended storage conditions before commercial release.",
+    ],
+    stages: [
+      { title: "Prepare the beverage", body: "Balance product blending, homogenisation or filtration with the specified recipe and processing flow." },
+      { title: "Treat and transfer", body: "Use the validated product-treatment process, controlled transfer and any necessary hygienic buffer arrangement for the selected filler." },
+      { title: "Prepare bottle and closure", body: "Choose the integrated PET blowing or separate bottle supply arrangement with packaging treatment and controlled filling-zone interfaces." },
+      { title: "Fill, close and verify", body: "Choose the valve and capper for the product and bottle. Inspect, label, code and pack under the approved product and packaging programme." },
+    ],
+    liquids: [
+      { title: "Juice, NFC and nectar", body: "Fruit juice, not-from-concentrate (NFC) products and nectars need a review of acidity, pulp, fibres, oxygen sensitivity and product-treatment requirements." },
+      { title: "Tea and functional beverages", body: "Select the filling route for the tea extract, flavour, sweetener and heat sensitivity. Confirm the intended storage temperature and package before selecting the equipment." },
+      { title: "Milk and plant-based drinks", body: "Evaluate UHT and aseptic packing for a long-life format, including heat stability, formulation and allergen changeovers." },
+      { title: "Drinkable yoghurt", body: "Evaluate smooth, pumpable formulations. Confirm viscosity, culture requirements and distribution temperature. Spoonable yoghurt may need a different process and filler." },
+    ],
+    relatedMachines: ["aseptic-bottle-filling-machine", "plate-sterilizing-equipment", "gjb-series-high-compressor-homogenize", "tq-2-vacuum-deaerator", "sleeve-labelling", "laser-coding-machine", "carton-packer", "automatic-palletizer"],
   },
   {
     slug: "barrel-water-production-line",
     title: "Barrel Water Production Line",
-    image: "/eone/barrel-water-line.webp",
-    summary: "A hygienic line for returned or new 19-litre water barrels, integrating washing, filling, capping and coding.",
+    image: "/eone/bestcrown/barrel-filling.webp",
+    imageAlt: "Best Crown five-gallon DG5 barrel washing, filling and capping machine",
+    imageCaption: "Best Crown DG5 five-gallon water filling system, 2022 catalogue, p. 4.",
+    summary: "Automatic washer, filler and capper for 12–19 L containers. Best Crown DG5 reference output ranges from 600 to 3,000 barrels/hour at 18.9 L.",
     overview: [
-      "Returned bottles pass through external and multi-stage internal washing with hot water, detergent, disinfectant and high-pressure rinsing. New bottles can enter after the appropriate external rinse.",
-      "Water is prepared through the selected filtration, reverse-osmosis and disinfection stages before accurate filling into large containers.",
-      "The barrels are capped and marked with production, batch and expiry information for distribution to homes, offices and commercial users.",
-      "Automated handling reduces dependence on manual operations and supports consistent sanitation, throughput and resource use.",
+      "Best Crown's DG5 production line combines automatic barrel washing, filling and capping. E-One selects a returnable-container layout around the condition of incoming barrels, de-capping and inspection needs, wash sequence, available floor space and clean transfer route.",
+      "The product-water system is sized for large-volume filling plus washing and rinsing consumption. Treatment may include appropriate filtration, reverse osmosis and final water-quality controls according to the source and finished product.",
+      "The catalogue references mechanical, flowmeter and ultrasonic-positioning valve options for different barrel-filling requirements. Specify container height, neck, cap and fill measurement before selecting the filler and handling parts.",
+      "The capped barrels are checked, coded where the pack supports it and routed to clean finished-stock handling for home, office or commercial dispenser distribution.",
     ],
     stages: [
-      { title: "Wash returned barrels", body: "Run internal and external cleaning stages matched to the returnable-container programme." },
-      { title: "Purify the water", body: "Combine media filtration, reverse osmosis and UV or ozone treatment as required." },
-      { title: "Fill and cap", body: "Dose purified water into 19-litre containers and apply the closure automatically." },
-      { title: "Code for traceability", body: "Add production and batch information before dispatch." },
+      { title: "Inspect and prepare barrels", body: "Sort new and returned containers, remove used closures where required and reject unsuitable or damaged barrels." },
+      { title: "Wash and supply water", body: "Match the validated external and internal cleaning sequence, rinsing, water treatment and buffer supply to the barrel condition." },
+      { title: "Fill and cap", body: "Select the DG5 configuration and valve type for the actual 12–19 L pack, fill accuracy and compatible dispenser closure." },
+      { title: "Inspect and dispatch", body: "Check fill and cap integrity, add approved traceability marks and move finished barrels to clean storage." },
     ],
-    relatedMachines: ["reverse-osmosis-ro-water-treatment-system", "barrel-filling-machine", "laser-coding-machine", "inkjet-coding-machine"],
+    liquids: [
+      { title: "Purified and drinking water", body: "Configure the treatment and washing programme against source-water analysis and the finished dispenser-water requirements." },
+      { title: "Mineral and spring water", body: "Best Crown lists mineral and spring water as DG5 applications. Confirm the approved treatment and product-quality parameters for the source." },
+    ],
+    relatedMachines: ["barrel-filling-machine", "reverse-osmosis-ro-water-treatment-system", "laser-coding-machine"],
   },
   {
     slug: "dairy-milk-production-line",
     title: "Dairy Milk Production Line",
-    image: "/eone/dairy-milk-line.webp",
-    summary: "A hygienic process line for fresh or long-life milk, from reception and standardization to filling and secondary packaging.",
+    image: "/eone/bestcrown/dairy-ultra-clean.webp",
+    imageAlt: "Best Crown ultra-clean PET liquid dairy beverage filling equipment",
+    imageCaption: "Best Crown ultra-clean liquid dairy filling unit, 2022 catalogue, pp. 17–18.",
+    summary: "Integrated processing and hygienic bottled dairy filling, including Best Crown ultra-clean cold-chain configurations and project-specific aseptic routes.",
     overview: [
-      "Raw milk is received, tested, chilled, clarified and filtered. Standardization sets the required fat level, with separation or cream recovery added when the product needs it.",
-      "Thermal processing can use HTST pasteurization for fresh milk or UHT treatment for shelf-stable formats. Homogenization then supports a smooth, stable product.",
-      "The line can fill HDPE or PET bottles, glass, gable-top cartons or sachets in an ultra-clean or aseptic environment selected for the required shelf life.",
-      "Coding and labelling provide traceability before shrink wrapping, crate packing or carton boxing for chilled or ambient distribution.",
+      "A dairy project starts with milk reception, testing, chilling, clarification and standardisation. Configure blending, homogenisation and the validated thermal process around the fat and protein content, intended texture, product sensitivity and output.",
+      "Best Crown's ultra-clean liquid dairy filling line is designed for cold-chain products including pasteurised milk, fermented yoghurt and active probiotic beverages. It references PET or PP bottles with tamper-evident caps and non-contact filling valves. E-One evaluates the bottle infeed, closure, hygienic transfer and chilled distribution arrangements for the intended product.",
+      "For long-life ambient products, scope the UHT process and aseptic filling route together, including the packaging barrier, product transfer and validation. The selected recipe and storage requirements determine whether the chilled or ambient system is appropriate.",
+      "Confirm the filling machine, sanitary circuits, monitoring and changeover arrangements. Finish the product with suitable labels, traceability codes, case packing and cold or ambient transport arrangements according to the approved distribution plan.",
     ],
     stages: [
-      { title: "Receive and standardize", body: "Test, chill, clarify and adjust raw milk to the target product specification." },
-      { title: "Heat-treat", body: "Choose HTST pasteurization or UHT processing around shelf-life requirements." },
-      { title: "Homogenize and hold", body: "Create a stable texture and maintain hygienic conditions ahead of filling." },
-      { title: "Fill and package", body: "Select the container, hygiene level, coding and secondary packaging for distribution." },
+      { title: "Receive and standardise", body: "Test, chill, clarify and adjust raw milk or prepared ingredients to the target composition." },
+      { title: "Homogenise and heat-treat", body: "Set the homogenisation duty and thermal treatment for the recipe and intended shelf life." },
+      { title: "Prepare product and pack", body: "Choose chilled holding or the validated aseptic circuit, compatible bottle supply, closure and hygiene requirements." },
+      { title: "Fill and distribute", body: "Use the selected ultra-clean or aseptic configuration, then inspect, code and pack for the agreed storage and distribution conditions." },
     ],
-    performanceNote: "The source material cites potential reductions of up to 50% in water use and 30% in energy use through optimized CIP, heat recovery and modular design. Project engineering determines achievable results.",
-    relatedMachines: ["plate-sterilizing-equipment", "gjb-series-high-compressor-homogenize", "glass-bottle-filling-machine", "laser-coding-machine", "inkjet-coding-machine", "shrink-packaging-machine"],
+    liquids: [
+      { title: "Pasteurised milk and milk drinks", body: "Best Crown's chilled dairy range supports evaluation of fresh pasteurised milk and suitable flavoured milk products with a controlled cold chain." },
+      { title: "Drinkable yoghurt and probiotics", body: "Review the viscosity, live-culture requirements and refrigeration programme for smooth drinkable yoghurt or active probiotic formulations." },
+      { title: "Long-life milk and protein beverages", body: "Evaluate the separate UHT and aseptic route for suitable low-acid liquids and validated ambient storage." },
+    ],
+    relatedMachines: ["plate-sterilizing-equipment", "gjb-series-high-compressor-homogenize", "aseptic-bottle-filling-machine", "sleeve-labelling", "laser-coding-machine", "carton-packer", "automatic-palletizer"],
   },
   {
     slug: "juice-production-line",
     title: "Juice Production Line",
-    image: "/eone/juice-line.webp",
-    summary: "A modular line for fruit juices, nectars and juice drinks, covering preparation, thermal treatment, filling and packing.",
+    image: "/eone/bestcrown/hot-fill-juice.webp",
+    imageAlt: "Best Crown enclosed PET hot-fill beverage production equipment",
+    imageCaption: "Best Crown PET hot-fill production line, 2022 catalogue, p. 9.",
+    summary: "Complete production for juice, tea, nectar and fruit-containing drinks, with hot-fill, ultra-clean and fruit-particle configurations.",
     overview: [
-      "Production can begin with fresh-fruit cleaning and extraction or dilution of concentrate. Deaeration and standardization help maintain flavour and repeatable composition, while process water is filtered and disinfected.",
-      "Pasteurization or UHT processing is selected for the required shelf life, with homogenization available to improve texture and stability. Sugar syrup, stabilizers and flavours can be dosed in the blending stage.",
-      "The hygienic or aseptic filler can be configured for PET, glass, cartons or pouches. Labelling and coding add required product and traceability information.",
-      "Shrink wrapping, tray packing or cartoning prepare the product for retail or bulk distribution, with palletizing available for warehouse-ready output.",
+      "E-One configures the preparation section for fresh-fruit extraction, concentrate dilution or ready-prepared ingredients. Treatment of process water, recipe blending, sugar or flavour dosing, deaeration and homogenisation are selected for the required beverage quality and texture.",
+      "Best Crown's enclosed PET hot-fill line integrates the filling and closing operations with PLC control, a filling-temperature control system and cleaning interfaces. The hot-fill configuration requires a bottle and closure suitable for the approved temperature and cooling cycle.",
+      "For beverages containing fruit pieces, Best Crown provides a small-particle filling model and a larger-particle configuration using separate fruit and liquid dosing. Its catalogue differentiates products below 5 mm from larger pieces above 5 mm and below 15 mm. Select the valve, neck finish, product handling and capacity around the actual formulation.",
+      "The ultra-clean and aseptic routes are additional technology choices for suitable NFC juices, teas and protein drinks. Product trials determine the validated heat treatment, filling duty, packaging and intended storage. Finished packs then pass to inspection, labelling, coding and secondary packing.",
     ],
     stages: [
-      { title: "Prepare the fruit", body: "Clean, break down and extract fresh produce, or prepare concentrate for blending." },
-      { title: "Standardize and treat", body: "Deaerate, dose ingredients and apply pasteurization or UHT processing." },
-      { title: "Fill hygienically", body: "Choose the hygiene level and filler around product, container and shelf life." },
-      { title: "Identify and pack", body: "Label, code and pack the finished juice for its distribution format." },
+      { title: "Prepare ingredients", body: "Use suitable fruit preparation and extraction or concentrate blending. Establish the water and ingredient quality for each SKU." },
+      { title: "Blend and treat", body: "Configure deaeration, ingredient dosing, homogenisation when appropriate and the validated thermal process." },
+      { title: "Choose the filling route", body: "Select hot-fill, ultra-clean or aseptic equipment based on the recipe and shelf-life goal. Match particle handling and bottle design to the product." },
+      { title: "Inspect, cool and pack", body: "Apply the required cooling and handling arrangement, verify closures and fill, then label, code, carton or shrink-wrap for distribution." },
     ],
-    relatedMachines: ["cxj-series-surf-fruit-cleaner", "dj-series-beater", "lz-1-5-type-spiral-juice-extractor", "djm-vertical-colloid-mill", "tq-2-vacuum-deaerator", "plate-sterilizing-equipment", "juice-filling-machine-hot-filling", "sleeve-labelling", "laser-coding-machine", "shrink-packaging-machine"],
+    liquids: [
+      { title: "Juices and nectars", body: "Pure juice, juice drinks, nectars and NFC beverages may require different extraction or blending steps and treatment conditions." },
+      { title: "Tea and functional drinks", body: "Best Crown references tea and functional beverages within its hot-fill range. Review extraction, recipe consistency and heat sensitivity." },
+      { title: "Fruit-particle beverages", body: "Choose the small or large fruit-particle configuration after checking the actual piece size, bottle neck, texture and mixing behaviour." },
+      { title: "Protein and sensitive drinks", body: "Evaluate the appropriate ultra-clean or aseptic filling route and thermal process for the formulation and intended shelf life." },
+    ],
+    relatedMachines: ["lz-1-5-type-spiral-juice-extractor", "djm-vertical-colloid-mill", "tq-2-vacuum-deaerator", "plate-sterilizing-equipment", "juice-filling-machine-hot-filling", "aseptic-bottle-filling-machine", "sleeve-labelling", "laser-coding-machine", "shrink-packaging-machine", "carton-packer", "automatic-palletizer"],
   },
   {
     slug: "plastic-injection-cap-compression-machines",
     title: "Total Injection Machines",
     image: "/eone/plastic-injection.webp",
-    summary: "Plastic-processing systems for PET preforms, packaging components and high-volume closure production.",
+    summary: "Complete plastics production cells for PET preforms, caps, pails, thin-wall packaging and other moulded components.",
     overview: [
       "The portfolio combines injection moulding for PET preforms and other components with compression moulding for beverage and packaging caps.",
       "Machine configuration is selected around material, mould, part geometry, cycle requirements and the required level of production flexibility.",
@@ -657,7 +601,7 @@ export const solutions: Solution[] = [
       { title: "Engineer the mould", body: "Match the machine, mould and utilities to the component and cycle target." },
       { title: "Commission production", body: "Validate part quality, repeatability, handling and operator procedures." },
     ],
-    relatedMachines: ["injection-moulding-machine", "cap-compression-machine"],
+    relatedMachines: ["pet-preform-injection-moulding-machine", "injection-moulding-machine", "pail-injection-moulding-machine", "cap-compression-machine"],
   },
   {
     slug: "edible-oil-filling-machines",
@@ -666,6 +610,7 @@ export const solutions: Solution[] = [
     summary: "Configurable filling and packaging systems for vegetable, palm, sunflower, soybean, groundnut and specialty oils.",
     overview: [
       "The filling system can be engineered for PET or glass bottles, HDPE jerry cans, pouches and metal tins across small retail and bulk formats.",
+      "The Best Crown catalogue includes PET oil-bottle formation within its rotary blow-moulding applications. For in-house bottle supply, evaluate the blow mould, preform, bottle geometry and closure before matching the bottle output to E-One's oil filling project.",
       "Semi-automatic arrangements use operator bottle placement for lower or moderate output. Fully automatic lines add conveyors, controlled nozzles and PLC/HMI operation for higher throughput.",
       "Labelling, coding and secondary packaging can be integrated around the selected container and route to market.",
     ],
@@ -675,8 +620,7 @@ export const solutions: Solution[] = [
       { title: "Fill accurately", body: "Configure the nozzle and dosing method for clean filling with controlled product loss." },
       { title: "Finish the pack", body: "Add capping, labelling, traceability coding and secondary packaging." },
     ],
-    performanceNote: "The source range covers containers from 250 ml to 25 L and larger project-specific formats.",
-    relatedMachines: ["oop-labelling-machine", "sleeve-labelling", "laser-coding-machine", "inkjet-coding-machine", "shrink-packaging-machine"],
+    relatedMachines: ["automatic-rotary-bottle-blowing-machine", "oop-labelling-machine", "laser-coding-machine", "shrink-packaging-machine", "carton-packer"],
   },
   {
     slug: "moulds",
@@ -694,25 +638,27 @@ export const solutions: Solution[] = [
       { title: "Custom component moulds", body: "Review wall thickness, surface finish, tolerances, parting lines and ejection for the target component." },
       { title: "Bottle blowing moulds", body: "Match the mould to the bottle drawing, cavity layout and linear or rotary blow-moulding machine." },
     ],
-    specs: [
-      { label: "Cavities and runner", value: "Cavity count and hot- or cold-runner layout selected for the part and output target" },
-      { label: "Tool steel and finish", value: "Agreed against the resin, expected tool life and surface requirements" },
-      { label: "Machine compatibility", value: "Platen and tie-bar clearance, shut height, shot capacity and ejection interface" },
-      { label: "Acceptance criteria", value: "Sample dimensions, part weight, appearance, repeatability and target cycle time" },
-    ],
-    relatedMachines: ["injection-moulding-machine", "cap-compression-machine"],
+    relatedMachines: ["pet-preform-injection-moulding-machine", "injection-moulding-machine", "pail-injection-moulding-machine", "cap-compression-machine", "automatic-linear-bottle-blowing-machine"],
   },
   {
     slug: "turnkey-beverage",
     title: "Turnkey Beverage Solutions",
-    image: "/eone/bottled-water-line.webp",
-    summary: "Complete bottled-water and carbonated-drink lines, from processing and filling to coding and final packaging.",
+    image: "/eone/bestcrown/turnkey-conveying.webp",
+    imageAlt: "Best Crown integrated beverage production facility with stainless-steel bottle conveyors and processing equipment",
+    imageCaption: "Best Crown complete-line conveyor arrangement, 2022 equipment catalogue, p. 23.",
+    summary: "E-One and Best Crown deliver integrated beverage line configurations for bottled water, carbonated drinks, juice, aseptic beverages and dairy.",
     overview: [
-      "E-One scopes each production line around the beverage recipe, packaging format and finished units per hour. The line design brings together the process equipment, container handling, filling and downstream systems.",
-      "Choose a line below to see its equipment, capacity considerations and the liquids that can be evaluated for the same production setup.",
+      "Langfang BestCrown Packing Machinery Co., Ltd. is E-One's beverage filling technology partner. Its catalogue covers complete PET drinking-water, carbonated-beverage, fruit juice, tea, protein drink and dairy production systems, with clean, ultra-clean and aseptic filling options.",
+      "E-One combines the beverage preparation, bottle formation, filling and downstream equipment around the required finished-pack rate. Choose an integrated blow–fill–cap combi-block where it fits the product and capacity, or a filling monoblock with a separate bottle supply arrangement.",
+      "Project planning includes the raw-material and product-property review, bottle and closure drawings, equipment layout, utilities and changeover arrangements. Agree the operating targets, inspection requirements, acceptance programme, commissioning and operator training scope before ordering.",
     ],
-    stages: [],
-    subsolutions: ["bottled-water-production-line", "carbonated-drink-production-line"],
+    stages: [
+      { title: "Prepare water and ingredients", body: "Analyse the water source and recipe, then configure process-water treatment, blending and thermal or carbonation equipment as needed." },
+      { title: "Form or feed the package", body: "Choose the PET blowing system, compatible container infeed and matched preform, mould and closure arrangement." },
+      { title: "Fill and close", body: "Select water, isobaric, hot-fill, ultra-clean or aseptic filling technology around the product, hygiene requirements and target speed." },
+      { title: "Inspect and dispatch", body: "Integrate label, code and fill inspection, conveyors, film or carton packing and palletising for the expected finished throughput." },
+    ],
+    subsolutions: ["bottled-water-production-line", "carbonated-drink-production-line", "aseptic-production-line"],
     relatedMachines: [],
   },
 ];
@@ -733,17 +679,6 @@ export const machineCategoryLabels: Record<"All machines" | MachineCategory, str
   "Liquid filling": "Liquid Filling Machine",
   "Packaging machines": "Packaging Machines",
   "Water treatment": "Water Treatment",
-};
-
-export const machineSizingDetails: Record<MachineCategory, Specification> = {
-  "Auxiliary machines": { label: "Process capacity", value: "Select the model using product or material type, hourly throughput and the connection to the next stage." },
-  "Bottle blowing": { label: "Bottle and tooling format", value: "Confirm preform weight, neck finish, bottle volume, mould cavities and compressed-air capacity." },
-  "Coding machines": { label: "Print configuration", value: "Confirm packaging material, line speed, code dimensions and the required mark or ink system." },
-  "Injection machines": { label: "Mould and capacity", value: "Confirm resin, part weight, cavity count, mould dimensions, target cycle and required output per hour." },
-  "Labelling machines": { label: "Label and bottle format", value: "Confirm label material and dimensions, bottle shape and diameter, and required bottles per hour." },
-  "Liquid filling": { label: "Filling capacity", value: "Confirm product, fill volume, temperature, container and closure. Throughput is quoted for that combination." },
-  "Packaging machines": { label: "Pack and output", value: "Confirm container dimensions, pack pattern, packaging material and required packs per minute." },
-  "Water treatment": { label: "System sizing", value: "Confirm source-water analysis, required treated-water flow, recovery target and disinfection requirements." },
 };
 
 export const machineCategories: ("All machines" | MachineCategory)[] = [

@@ -2,7 +2,7 @@ import { LineCards } from "../lines";
 
 export const metadata = {
   title: "Production solutions",
-  description: "Explore E-One’s total injection machines, precision moulds and turnkey lines for bottled water and carbonated drinks.",
+  description: "Explore E-One’s injection moulding systems, precision moulds and turnkey lines for bottled water, carbonated drinks and aseptic beverages.",
 };
 
 export default function Solutions() {

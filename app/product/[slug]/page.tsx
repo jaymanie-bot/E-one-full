@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { ArrowRight, Check, Settings2 } from "lucide-react";
-import { machineBySlug, machineCategoryLabels, machines, machineSizingDetails, solutions } from "../../catalogue-data";
+import { BuyerChecklist, BuyerSpecifications } from "../../buyer-sections";
+import { machineBySlug, machineCategoryLabels, machines, solutions } from "../../catalogue-data";
 import { quoteUrl } from "../../data";
+import { machineGuides } from "../../machine-guides";
 import { MachinePicture } from "../../machine-picture";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -21,7 +23,11 @@ export async function generateMetadata({ params }: Props) {
 export default async function MachineDetail({ params }: Props) {
   const machine = await getMachine(params);
   const category = machineCategoryLabels[machine.category];
-  const specs = [...(machine.specs ?? []), machineSizingDetails[machine.category]];
+  const guide = machineGuides[machine.slug];
+  const source = machine.specSource && {
+    href: machine.specSource,
+    label: machine.specSourceLabel ?? "Manufacturer reference",
+  };
   const lineMatches = solutions.filter((solution) => solution.relatedMachines.includes(machine.slug));
   const related = machines
     .filter((item) => item.category === machine.category && item.slug !== machine.slug)
@@ -32,10 +38,13 @@ export default async function MachineDetail({ params }: Props) {
       <section className="wrap inner machine-detail-hero">
         <a className="back" href={`/machinery?range=${encodeURIComponent(category)}`}>Machinery catalogue / {category}</a>
         <div className="machine-detail-grid">
-          <div className="machine-visual">
-            <MachinePicture image={machine.image} title={machine.title} />
-            <span className="machine-category-badge">{category}</span>
-          </div>
+          <figure className="catalogue-figure">
+            <div className="machine-visual">
+              <MachinePicture image={machine.image} title={machine.title} />
+              <span className="machine-category-badge">{category}</span>
+            </div>
+            {machine.imageCaption && <figcaption>{machine.imageCaption}</figcaption>}
+          </figure>
           <div className="machine-intro">
             <div className="eyebrow"><i />{category}</div>
             <h1>{machine.title}<span>.</span></h1>
@@ -48,6 +57,7 @@ export default async function MachineDetail({ params }: Props) {
                 Book a technical call
               </a>
             </div>
+            <a className="textlink specifications-jump" href="#technical-specifications">See technical specifications</a>
           </div>
         </div>
       </section>
@@ -59,6 +69,7 @@ export default async function MachineDetail({ params }: Props) {
             <h2>What it does<span>.</span></h2>
             <div className="long-copy">
               {machine.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <p>{guide.application}</p>
             </div>
           </div>
           <div className="feature-panel">
@@ -72,19 +83,7 @@ export default async function MachineDetail({ params }: Props) {
         </div>
       </section>
 
-      <section className="wrap machine-specs">
-        <h2>Technical specifications<span>.</span></h2>
-        <div className="spec-cards">
-          {specs.map((spec) => (
-            <article key={spec.label}>
-              <span>{spec.label}</span>
-              <strong>{spec.value}</strong>
-            </article>
-          ))}
-        </div>
-        <p className="spec-disclaimer">Request a model-specific datasheet and confirm final capacity against your application and plant utilities.</p>
-        {machine.specSource && <a className="textlink" href={machine.specSource}>Manufacturer specifications and product images</a>}
-      </section>
+      <BuyerSpecifications guide={guide} specs={machine.specs} title="Technical specifications" source={source || undefined} />
 
       {lineMatches.length > 0 && (
         <section className="solution-links">
@@ -122,18 +121,7 @@ export default async function MachineDetail({ params }: Props) {
         </section>
       )}
 
-      <section className="machine-cta">
-        <div className="wrap">
-          <div>
-            <div className="eyebrow light"><i />PROJECT-SPECIFIC ENGINEERING</div>
-            <h2>Configure this machine for your line<span>.</span></h2>
-          </div>
-          <div>
-            <p>Tell E-One what you make, the container or component format, your target output and the utilities available at your facility.</p>
-            <a className="btn orange" href={quoteUrl(machine.title)}>Start a machinery enquiry <ArrowRight size={17} /></a>
-          </div>
-        </div>
-      </section>
+      <BuyerChecklist guide={guide} quoteHref={quoteUrl(machine.title)} />
     </main>
   );
 }

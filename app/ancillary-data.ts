@@ -74,6 +74,31 @@ const equipment = [
     image: photo("2021/12/de8513bfbcc14e8eaeca49cdff57a213.jpg"),
     specSource: `${manufacturer}/drying-and-dehumidifying-series/wsdb-standard-hopper-dryer/`,
   },
+  {
+    slug: "resin-auto-loader",
+    title: "Resin Auto-Loader",
+    summary: "Automatically conveys pellets to a dryer or processing machine when its hopper calls for material.",
+    overview: ["A vacuum receiver transfers resin from the source container and reduces routine manual handling at the press. Select the receiver and blower around the material and conveying route."],
+    features: ["Demand-controlled loading", "Hopper or dryer mounting", "Accessible filter and material shortage alarm on the reference model"],
+    specs: [
+      { label: "Wensui WSAL-300G reference conveying capacity", value: "300 kg/h at catalogue conditions" },
+      { label: "Reference lift and receiver volume", value: "3.5 m pump lift and 6 L receiver" },
+    ],
+    image: "/catalogue/wensui-auto-loader.webp",
+    imageCaption: "Wensui WSAL-300G, manufacturer selection guide.",
+    specSource: `${manufacturer}/feeding-and-conveying-series/wsal-300g-stand-alone-autoloader/`,
+  },
+  {
+    slug: "industrial-water-chiller",
+    title: "Industrial Water Chiller",
+    summary: "Supplies controlled chilled water for mould cooling and other compatible process equipment.",
+    overview: ["Select an air- or water-cooled system against the heat to be removed from the process. A correctly sized pump and distribution circuit deliver the required flow to each machine."],
+    features: ["Air- or water-cooled options", "Controlled process-water temperature", "Mould and plant water-circuit integration"],
+    specs: [{ label: "Wensui guide selection examples", value: "4–30 hp compressor classes. Obtain cooling capacity in kW at design conditions." }],
+    image: "/catalogue/wensui-water-chiller.webp",
+    imageCaption: "Wensui process cooling equipment, manufacturer selection guide.",
+    specSource: `${manufacturer}/heating-and-cooling-series/air-and-water-chiller/`,
+  },
 ];
 
 export const injectionAncillaries: Machine[] = equipment.map((machine) => ({
